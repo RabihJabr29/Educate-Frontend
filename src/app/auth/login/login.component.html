@@ -1,0 +1,131 @@
+<!-- <div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 overlay"></div>
+    <div class="col-md-6 p-4">
+      <mat-card class="p-0">
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+        <mat-card-header *ngIf="!isLoading" class="p-4 justify-content-center">
+          <mat-card-title> Sign in </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content class="p-4">
+          <form
+            (submit)="onLogin(loginForm)"
+            #loginForm="ngForm"
+            *ngIf="!isLoading"
+          >
+            <mat-form-field>
+              <input
+                type="email"
+                name="email"
+                ngModel
+                placeholder="Email Address"
+                matInput
+                minlength="3"
+                #emailInput="ngModel"
+                required
+                email
+              />
+              <mat-error *ngIf="emailInput.invalid && formInvalid"
+                >Please enter a valid email address</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                type="password"
+                name="password"
+                ngModel
+                matInput
+                placeholder="Password"
+                #passwordInput="ngModel"
+                required
+                autocomplete="off"
+              />
+              <mat-error *ngIf="passwordInput.invalid && formInvalid"
+                >Please enter a valid password</mat-error
+              >
+            </mat-form-field>
+            <button *ngIf="!isLoading" color="" mat-raised-button type="submit">
+              Login
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div> -->
+
+<div class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+  <div class="container">
+    <div class="card login-card">
+      <div class="row no-gutters">
+        <div class="col-md-5 welcome">
+          <h3 class="welcome-description-top">Welcome Back!</h3>
+          <h6 class="welcome-description-bottom">
+            Sign in right where you left off. Your classes are waiting for you!
+          </h6>
+        </div>
+        <div class="col-md-7">
+          <div class="card-body">
+            <p class="login-card-description">Sign into your account</p>
+
+            <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+              <div class="form-group">
+                <input
+                  type="email"
+                  name="email"
+                  id="validationEmail"
+                  ngModel
+                  placeholder="Email Address"
+                  minlength="3"
+                  #emailInput="ngModel"
+                  required
+                  email
+                  class="form-control"
+                />
+                <span
+                  class="text-danger span-error-message"
+                  *ngIf="emailInput.invalid && formInvalid"
+                >
+                  Please enter a valid email address</span
+                >
+              </div>
+              <div class="form-group mb-4">
+                <input
+                  type="password"
+                  name="password"
+                  ngModel
+                  placeholder="Password"
+                  #passwordInput="ngModel"
+                  autocomplete="off"
+                  class="form-control"
+                  required
+                />
+                <span
+                  class="text-danger span-error-message"
+                  *ngIf="passwordInput.invalid && formInvalid"
+                >
+                  Password is incorrect</span
+                >
+              </div>
+              <button
+                name="login"
+                class="btn btn-block login-btn mb-4"
+                type="submit"
+                value="Login"
+              >
+                Login
+              </button>
+            </form>
+            <a href="#!" class="forgot-password-link">Forgot password?</a>
+            <p class="login-card-footer-text">
+              Don't have an account?
+              <a class="text-reset" routerLink="/auth/signup">Register here</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

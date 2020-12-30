@@ -1,0 +1,74 @@
+<div class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+  <div class="container">
+    <div class="card login-card">
+      <div class="row no-gutters">
+        <div class="col-md-5 welcome">
+          <h3 class="welcome-description-top">
+            Welcome to our Online Learning System!
+          </h3>
+          <h6 class="welcome-description-bottom">
+            Create a new account now!. Your classes are waiting for you!
+          </h6>
+        </div>
+        <div class="col-md-7">
+          <div class="card-body">
+            <p class="login-card-description">Create a new account</p>
+
+            <form (submit)="onSignUp(loginForm)" #loginForm="ngForm">
+              <div class="form-group">
+                <input
+                  type="email"
+                  name="email"
+                  id="validationEmail"
+                  ngModel
+                  placeholder="Email Address"
+                  minlength="3"
+                  #emailInput="ngModel"
+                  required
+                  email
+                  class="form-control"
+                />
+                <span
+                  class="text-danger span-error-message"
+                  *ngIf="emailInput.invalid && formInvalid"
+                >
+                  Please enter a valid email address</span
+                >
+              </div>
+              <div class="form-group mb-4">
+                <input
+                  type="password"
+                  name="password"
+                  ngModel
+                  placeholder="Password"
+                  #passwordInput="ngModel"
+                  autocomplete="off"
+                  class="form-control"
+                  required
+                />
+                <span
+                  class="text-danger span-error-message"
+                  *ngIf="passwordInput.invalid && formInvalid"
+                >
+                  Password is incorrect</span
+                >
+              </div>
+              <button
+                name="signup"
+                class="btn btn-block login-btn mb-4"
+                type="submit"
+                value="Sign up"
+              >
+                Sign up
+              </button>
+            </form>
+            <p class="login-card-footer-text">
+              Already have an account?
+              <a class="text-reset" routerLink="/auth/login">Login here</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
