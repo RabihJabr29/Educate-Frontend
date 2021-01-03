@@ -7,6 +7,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { WrapperLayoutComponent } from './wrapper-layout/wrapper-layout.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 // import { AuthInterceptor } from './auth/auth-interceptor';
 
@@ -15,6 +18,9 @@ import { AppComponent } from './app.component';
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
+    WrapperLayoutComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

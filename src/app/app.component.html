@@ -1,3 +1,4 @@
 <main>
-  <router-outlet></router-outlet>
+  <app-wrapper-layout *ngIf="showHead"></app-wrapper-layout>
+  <router-outlet *ngIf="!showHead"></router-outlet>
 </main>

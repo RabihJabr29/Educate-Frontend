@@ -1,0 +1,88 @@
+<div class="d-flex {{ toggled }}" id="wrapper">
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <div class="sidebar-heading">Educate</div>
+    <div class="list-group list-group-flush">
+      <a
+        class="list-group-item list-group-item-action border-0"
+        (click)="onClickListItemDashboard()"
+      >
+        <label
+          class="list-text"
+          [ngClass]="{ 'active-list-item': active == 'dashboard' }"
+        >
+          <i class="material-icons list-icon">home</i>
+          Dashboard
+        </label>
+      </a>
+      <a
+        class="list-group-item list-group-item-action border-0"
+        (click)="onClickListItemCourses()"
+      >
+        <label
+          class="list-text"
+          [ngClass]="{ 'active-list-item': active == 'courses' }"
+        >
+          <i class="material-icons list-icon">book</i>
+          Courses
+        </label>
+      </a>
+      <a
+        class="list-group-item list-group-item-action border-0"
+        (click)="onClickListItemAssignments()"
+      >
+        <label
+          class="list-text"
+          [ngClass]="{ 'active-list-item': active == 'assignments' }"
+        >
+          <i class="material-icons list-icon">assignment_turned_in</i>
+          Assignments
+        </label>
+      </a>
+      <a
+        class="list-group-item list-group-item-action border-0"
+        (click)="onClickListItemCalendar()"
+      >
+        <label
+          class="list-text"
+          [ngClass]="{ 'active-list-item': active == 'calendar' }"
+        >
+          <i class="material-icons list-icon">calendar_today</i>
+          Calendar
+        </label>
+      </a>
+    </div>
+  </div>
+  <!-- /#sidebar-wrapper -->
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <span class="btn" (click)="toggleMenu($event)">
+        <i class="material-icons icon-grey">menu</i>
+      </span>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <span class="btn">
+              <i class="material-icons icon-grey">settings</i>
+            </span>
+          </li>
+          <li class="nav-item">
+            <span class="btn">
+              <i class="material-icons icon-grey">notifications_active</i>
+            </span>
+          </li>
+          <li class="nav-item">
+            <span class="btn">
+              <i class="material-icons icon-grey">person</i>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+<!-- /#wrapper -->
