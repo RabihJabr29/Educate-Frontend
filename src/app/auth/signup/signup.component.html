@@ -2,7 +2,7 @@
   <div class="container">
     <div class="card login-card">
       <div class="row no-gutters">
-        <div class="col-md-5 welcome">
+        <div class="col-md-4 welcome">
           <h3 class="welcome-description-top">
             Welcome to our Online Learning System!
           </h3>
@@ -10,7 +10,7 @@
             Create a new account now!. Your classes are waiting for you!
           </h6>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
           <div class="card-body">
             <p class="login-card-description">Create a new account</p>
 
@@ -35,7 +35,7 @@
                   Please enter a valid email address</span
                 >
               </div>
-              <div class="form-group mb-4">
+              <div class="form-group">
                 <input
                   type="password"
                   name="password"
@@ -50,7 +50,28 @@
                   class="text-danger span-error-message"
                   *ngIf="passwordInput.invalid && formInvalid"
                 >
-                  Password is incorrect</span
+                  Password is weak</span
+                >
+              </div>
+              <div class="form-group mb-4">
+                <input
+                  type="password"
+                  name="password2"
+                  ngModel
+                  placeholder="Re-enter password"
+                  #passwordInput2="ngModel"
+                  autocomplete="off"
+                  class="form-control"
+                  required
+                />
+                <span
+                  class="text-danger span-error-message"
+                  *ngIf="
+                    (passwordInput2.invalid && formInvalid) ||
+                    passwordDoesNotMatch
+                  "
+                >
+                  Password does not match</span
                 >
               </div>
               <button

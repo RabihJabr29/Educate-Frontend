@@ -13,6 +13,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   private authStatusSubs: Subscription;
   constructor(private authService: AuthService) { }
   formInvalid: boolean = false;
+  passwordDoesNotMatch: boolean = false;
 
   ngOnInit(): void {
     // this.authStatusSubs = this.authService
@@ -33,7 +34,12 @@ export class SignupComponent implements OnInit, OnDestroy {
     if (form.invalid) {
       return;
     }
-
+    if (form.value.password != form.value.password2) {
+      this.passwordDoesNotMatch = true;
+      return;
+    } else {
+      this.passwordDoesNotMatch = false;
+    }
     console.log("welcome new " + form.value.email);
     // this.isLoading = true;
     // this.authService.createUser(form.value.email, form.value.password);
