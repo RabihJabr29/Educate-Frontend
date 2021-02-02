@@ -9,6 +9,10 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
+    path: '',
+    component: DashboardComponent
+  },
+  {
     path: 'dashboard',
     component: DashboardComponent
   }

@@ -13,3 +13,11 @@ body {
 .icon-grey {
   color: grey;
 }
+
+.text-bold {
+  font-weight: bold;
+}
+
+.background-color-gray {
+  background-color: rgb(236, 233, 233);
+}

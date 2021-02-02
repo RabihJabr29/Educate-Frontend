@@ -1,0 +1,18 @@
+.bg-course-primary {
+  background-color: rgb(255, 55, 105);
+}
+
+.card-course-text {
+  font-size: small;
+}
+
+.card-course-text-small {
+  font-size: smaller;
+  color: gray;
+  display: inline-flex;
+  align-items: center;
+}
+
+.card-course-icon {
+  font-size: medium;
+}

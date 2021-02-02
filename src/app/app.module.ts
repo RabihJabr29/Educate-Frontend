@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { WrapperLayoutComponent } from './wrapper-layout/wrapper-layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CourseCardComponent } from './components/course-card/course-card.component';
 
 // import { AuthInterceptor } from './auth/auth-interceptor';
 
@@ -21,6 +22,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HeaderComponent,
     WrapperLayoutComponent,
     DashboardComponent,
+    CourseCardComponent,
   ],
   imports: [
     BrowserModule,
