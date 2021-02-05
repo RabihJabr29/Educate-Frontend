@@ -1,0 +1,24 @@
+<div
+  class="row border-rounded background-color-light-gray mt-3"
+  style="height: 60px"
+>
+  <div class="col center-elements">
+    <p class="text-bold text-size-small m-0">{{ assignment.courseName }}</p>
+  </div>
+  <div class="col center-elements">
+    <p class="list-item-text text-bold m-0">{{ assignment.type }}</p>
+  </div>
+  <div class="col center-elements">
+    <p class="list-item-text text-bold m-0">
+      {{ assignment.grade }}/{{ assignment.totalGrade }}
+    </p>
+  </div>
+  <div class="col center-elements">
+    <p class="list-item-text text-bold m-0">{{ assignment.dueDate }}</p>
+  </div>
+  <div class="col center-elements">
+    <p class="list-item-text text-bold m-0" [ngClass]="assignment.status">
+      {{ assignment.status }}
+    </p>
+  </div>
+</div>

@@ -4,13 +4,49 @@
       <div class="container bg-white m-4 p-4 border-rounded">
         <div class="row p-0 m-0">
           <div class="col"><h4 class="text-bold">Courses</h4></div>
+          <div class="col float-right text-right">
+            <button class="btn btn-link-custom">
+              <i class="material-icons label-icon mr-1">visibility</i
+              ><span>view all</span>
+            </button>
+          </div>
         </div>
         <div
-          class="row scrolling-wrapper flex-row flex-nowrap mt-4 pb-4 pt-2 example"
+          class="row scrolling-wrapper-horizontal flex-row flex-nowrap pt-2 hide-scrollbar"
         >
           <div class="col-5 m-2"><app-course-card></app-course-card></div>
           <div class="col-5 m-2"><app-course-card></app-course-card></div>
           <div class="col-5 m-2"><app-course-card></app-course-card></div>
+        </div>
+      </div>
+      <div class="container bg-white m-4 p-4 border-rounded">
+        <div class="row p-0 m-0">
+          <div class="col"><h4 class="text-bold">Assignments</h4></div>
+          <div class="col float-right text-right">
+            <button class="btn btn-link-custom">
+              <i class="material-icons label-icon mr-1">visibility</i
+              ><span>view all</span>
+            </button>
+          </div>
+        </div>
+        <div
+          class="row scrolling-wrapper-vertical flex-column flex-nowrap pb-4 pt-2 hide-scrollbar"
+          style="height: 300px"
+        >
+          <app-assignment-list-item></app-assignment-list-item>
+          <app-assignment-list-item></app-assignment-list-item>
+          <app-assignment-list-item></app-assignment-list-item>
+          <app-assignment-list-item></app-assignment-list-item>
+          <app-assignment-list-item></app-assignment-list-item
+          ><app-assignment-list-item></app-assignment-list-item
+          ><app-assignment-list-item></app-assignment-list-item>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="container bg-white m-4 p-4 border-rounded">
+        <div class="row p-0 m-0">
+          <div class="col"><h4 class="text-bold">Calendar</h4></div>
         </div>
       </div>
     </div>

@@ -1,0 +1,22 @@
+.list-item-text {
+  font-size: small;
+  color: gray;
+}
+
+.open {
+  color: rgb(20, 179, 41);
+}
+
+.closed {
+  color: rgb(223, 61, 61);
+}
+
+.text-size-small {
+  font-size: small;
+}
+
+.center-elements {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

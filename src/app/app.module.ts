@@ -11,6 +11,7 @@ import { HeaderComponent } from './header/header.component';
 import { WrapperLayoutComponent } from './wrapper-layout/wrapper-layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CourseCardComponent } from './components/course-card/course-card.component';
+import { AssignmentListItemComponent } from './components/assignment-list-item/assignment-list-item.component';
 
 // import { AuthInterceptor } from './auth/auth-interceptor';
 
@@ -23,6 +24,7 @@ import { CourseCardComponent } from './components/course-card/course-card.compon
     WrapperLayoutComponent,
     DashboardComponent,
     CourseCardComponent,
+    AssignmentListItemComponent,
   ],
   imports: [
     BrowserModule,
