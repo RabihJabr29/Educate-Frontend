@@ -7,11 +7,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { WrapperLayoutComponent } from './wrapper-layout/wrapper-layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CourseCardComponent } from './components/course-card/course-card.component';
 import { AssignmentListItemComponent } from './components/assignment-list-item/assignment-list-item.component';
+import { CoursesComponent } from './courses/courses.component';
 
 // import { AuthInterceptor } from './auth/auth-interceptor';
 
@@ -20,11 +20,11 @@ import { AssignmentListItemComponent } from './components/assignment-list-item/a
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     WrapperLayoutComponent,
     DashboardComponent,
     CourseCardComponent,
     AssignmentListItemComponent,
+    CoursesComponent
   ],
   imports: [
     BrowserModule,

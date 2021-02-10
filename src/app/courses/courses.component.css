@@ -1,0 +1,31 @@
+.scrolling-wrapper-horizontal {
+  overflow-x: auto;
+}
+
+.scrolling-wrapper-vertical {
+  overflow-y: scroll;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.btn-link-custom {
+  color: #519fff;
+  background-color: white;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.label-icon {
+  font-size: medium;
+  vertical-align: middle;
+}

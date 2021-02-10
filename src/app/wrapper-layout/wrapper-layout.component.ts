@@ -1,4 +1,8 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
+import { WrapperService } from './wrapper.service';
+
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-wrapper-layout',
@@ -8,10 +12,19 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 export class WrapperLayoutComponent implements OnInit {
 
   toggled: string = "";
-  active: string = "dashboard";
-  constructor() { }
+  active: string;
+  private activePathListenerSubs: Subscription;
+
+
+  constructor(private router: Router, private wrapperService: WrapperService) { }
 
   ngOnInit(): void {
+    this.active = this.wrapperService.getActiveStatus();
+    this.activePathListenerSubs = this.wrapperService.getActiveStatusListener().subscribe(
+      (path) => {
+        this.active = path;
+      }
+    );
   }
 
   toggleMenu(e: Event) {
@@ -24,9 +37,12 @@ export class WrapperLayoutComponent implements OnInit {
 
   onClickListItemDashboard() {
     this.active = 'dashboard';
+    this.router.navigateByUrl("/dashboard");
   }
+
   onClickListItemCourses() {
     this.active = 'courses';
+    this.router.navigateByUrl("/courses");
   }
   onClickListItemAssignments() {
     this.active = 'assignments';
