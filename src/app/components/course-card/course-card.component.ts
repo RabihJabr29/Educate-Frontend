@@ -16,4 +16,7 @@ export class CourseCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onClickCourseCard() {
+    console.log("Hello from course card");
+  }
 }

@@ -16,3 +16,7 @@
 .card-course-icon {
   font-size: medium;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
