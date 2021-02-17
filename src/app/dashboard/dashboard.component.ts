@@ -17,7 +17,6 @@ export class DashboardComponent implements OnInit {
 
   onClickViewCourses() {
     this.router.navigateByUrl("/courses");
-    console.log("courses");
     this.wrapperService.navigateTo("courses");
   }
 

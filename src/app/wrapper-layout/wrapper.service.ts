@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class WrapperService {
-  active: string = 'dashboard';
+  active: string;
 
   private activeStatusListener = new Subject<string>();
 
@@ -13,6 +13,11 @@ export class WrapperService {
 
   getActiveStatus() {
     return this.active;
+  }
+
+  setActiveLink(path: string) {
+    this.active = path;
+    this.activeStatusListener.next(path);
   }
 
   getActiveStatusListener() {

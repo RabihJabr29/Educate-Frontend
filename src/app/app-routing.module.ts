@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AssignmentsComponent } from './assignments/assignments.component';
+import { CalendarComponent } from './calendar/calendar.component';
 import { CoursesComponent } from './courses/courses.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { WrapperLayoutComponent } from './wrapper-layout/wrapper-layout.component';
@@ -16,7 +18,9 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'courses', component: CoursesComponent }
+      { path: 'courses', component: CoursesComponent },
+      { path: 'calendar', component: CalendarComponent },
+      { path: 'assignments', component: AssignmentsComponent }
     ]
   },
 

@@ -12,6 +12,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CourseCardComponent } from './components/course-card/course-card.component';
 import { AssignmentListItemComponent } from './components/assignment-list-item/assignment-list-item.component';
 import { CoursesComponent } from './courses/courses.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AssignmentsComponent } from './assignments/assignments.component';
 
 // import { AuthInterceptor } from './auth/auth-interceptor';
 
@@ -24,14 +26,16 @@ import { CoursesComponent } from './courses/courses.component';
     DashboardComponent,
     CourseCardComponent,
     AssignmentListItemComponent,
-    CoursesComponent
+    CoursesComponent,
+    AssignmentsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

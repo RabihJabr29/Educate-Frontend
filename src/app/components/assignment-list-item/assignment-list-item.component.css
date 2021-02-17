@@ -20,3 +20,12 @@
   align-items: center;
   justify-content: center;
 }
+
+.left-coloring {
+  background: linear-gradient(
+    to right,
+    red 1rem,
+    rgb(241, 241, 241) 1rem,
+    rgb(241, 241, 241) 100%
+  );
+}

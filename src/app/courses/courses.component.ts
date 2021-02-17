@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WrapperService } from '../wrapper-layout/wrapper.service';
 
 
 @Component({
@@ -10,7 +11,6 @@ export class CoursesComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
   }
 
 }
