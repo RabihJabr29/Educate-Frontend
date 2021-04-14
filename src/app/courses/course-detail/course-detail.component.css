@@ -1,0 +1,44 @@
+.bg-course-primary {
+  background-color: rgb(255, 55, 105);
+}
+
+.white {
+  color: white;
+}
+
+.course-code {
+  font-weight: bold;
+  font-size: large;
+}
+
+.course-title {
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.card-course-text-small {
+  font-size: smaller;
+  color: gray;
+  display: inline-flex;
+  align-items: center;
+}
+
+.card-course-icon {
+  font-size: medium;
+}
+
+.nav-title {
+  color: grey;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.nav-title:hover {
+  color: rgb(255, 55, 105);
+}
+
+.active-nav-item {
+  color: rgb(255, 55, 105);
+  border-bottom-style: solid;
+  border-bottom-color: rgb(255, 55, 105);
+}

@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col">
+    <div class="card border-rounded shadow m-4">
+      <div
+        class="card-img-top bg-course-primary border-top-rounded"
+        style="height: 55px"
+      >
+        <span class="material-icons m-3 white"> arrow_back </span>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <p class="course-code mb-0">CSC-490</p>
+            <p class="course-title mb-0">Web Development</p>
+            <label class="card-course-text-small">
+              <i class="material-icons icon-grey card-course-icon mr-2"
+                >query_builder</i
+              >
+              TTH - 01:00 PM - 2:15 - 1hr 15min
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <nav class="navbar navbar-expand-md navbar-light ml-0 pl-0">
+              <a
+                class="navbar-brand nav-title ml-0"
+                [ngClass]="{
+                  'active-nav-item': activeNavItem == 'course-content'
+                }"
+                (click)="onClickNavItemCourseContent()"
+                >Course Content</a
+              >
+              <a
+                class="navbar-brand nav-title ml-3"
+                [ngClass]="{
+                  'active-nav-item': activeNavItem == 'students'
+                }"
+                (click)="onClickNavItemStudents()"
+                >Students</a
+              >
+              <a
+                class="navbar-brand nav-title ml-3"
+                [ngClass]="{
+                  'active-nav-item': activeNavItem == 'assignments'
+                }"
+                (click)="onClickNavItemAssignments()"
+                >Assignments</a
+              >
+              <a
+                class="navbar-brand nav-title ml-3"
+                [ngClass]="{
+                  'active-nav-item': activeNavItem == 'grades'
+                }"
+                (click)="onClickNavItemGrades()"
+                >Grades</a
+              >
+            </nav>
+          </div>
+        </div>
+        <div>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

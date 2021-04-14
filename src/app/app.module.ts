@@ -14,6 +14,11 @@ import { AssignmentListItemComponent } from './components/assignment-list-item/a
 import { CoursesComponent } from './courses/courses.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AssignmentsComponent } from './assignments/assignments.component';
+import { CourseDetailComponent } from './courses/course-detail/course-detail.component';
+import { CourseContentComponent } from './courses/course-detail/course-content/course-content.component';
+import { CourseStudentsComponent } from './courses/course-detail/course-students/course-students.component';
+import { CourseAssignmentsComponent } from './courses/course-detail/course-assignments/course-assignments.component';
+import { CourseGradesComponent } from './courses/course-detail/course-grades/course-grades.component';
 
 // import { AuthInterceptor } from './auth/auth-interceptor';
 
@@ -27,7 +32,12 @@ import { AssignmentsComponent } from './assignments/assignments.component';
     CourseCardComponent,
     AssignmentListItemComponent,
     CoursesComponent,
-    AssignmentsComponent
+    AssignmentsComponent,
+    CourseDetailComponent,
+    CourseContentComponent,
+    CourseStudentsComponent,
+    CourseAssignmentsComponent,
+    CourseGradesComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-card',
@@ -11,12 +12,12 @@ export class CourseCardComponent implements OnInit {
   courseParticipantsNumber: Number = 21;
   courseWeeklySchedule = "MWF: 02:00 PM - 02:50 PM";
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
   onClickCourseCard() {
-    console.log("Hello from course card");
+    this.router.navigateByUrl("courses/course-detail")
   }
 }
