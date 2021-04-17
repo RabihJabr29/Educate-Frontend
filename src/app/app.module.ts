@@ -6,6 +6,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+
 import { AppComponent } from './app.component';
 import { WrapperLayoutComponent } from './wrapper-layout/wrapper-layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -23,6 +27,10 @@ import { CourseGradesComponent } from './courses/course-detail/course-grades/cou
 // import { AuthInterceptor } from './auth/auth-interceptor';
 
 
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  interactionPlugin
+]);
 
 @NgModule({
   declarations: [
@@ -45,7 +53,8 @@ import { CourseGradesComponent } from './courses/course-detail/course-grades/cou
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    FullCalendarModule
   ],
   providers: [
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
