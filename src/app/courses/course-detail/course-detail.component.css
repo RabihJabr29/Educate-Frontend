@@ -42,3 +42,7 @@
   border-bottom-style: solid;
   border-bottom-color: rgb(255, 55, 105);
 }
+
+.hover {
+  cursor: pointer;
+}

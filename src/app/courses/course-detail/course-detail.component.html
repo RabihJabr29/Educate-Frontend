@@ -5,7 +5,12 @@
         class="card-img-top bg-course-primary border-top-rounded"
         style="height: 55px"
       >
-        <span class="material-icons m-3 white"> arrow_back </span>
+        <span
+          class="material-icons m-3 white hover"
+          (click)="onClickBackArrow()"
+        >
+          arrow_back
+        </span>
       </div>
       <div class="card-body">
         <div class="row">
@@ -24,7 +29,7 @@
           <div class="col">
             <nav class="navbar navbar-expand-md navbar-light ml-0 pl-0">
               <a
-                class="navbar-brand nav-title ml-0"
+                class="navbar-brand nav-title ml-0 hover"
                 [ngClass]="{
                   'active-nav-item': activeNavItem == 'course-content'
                 }"
@@ -32,7 +37,7 @@
                 >Course Content</a
               >
               <a
-                class="navbar-brand nav-title ml-3"
+                class="navbar-brand nav-title ml-3 hover"
                 [ngClass]="{
                   'active-nav-item': activeNavItem == 'students'
                 }"
@@ -40,7 +45,7 @@
                 >Students</a
               >
               <a
-                class="navbar-brand nav-title ml-3"
+                class="navbar-brand nav-title ml-3 hover"
                 [ngClass]="{
                   'active-nav-item': activeNavItem == 'assignments'
                 }"
@@ -48,7 +53,7 @@
                 >Assignments</a
               >
               <a
-                class="navbar-brand nav-title ml-3"
+                class="navbar-brand nav-title ml-3 hover"
                 [ngClass]="{
                   'active-nav-item': activeNavItem == 'grades'
                 }"

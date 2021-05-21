@@ -55,5 +55,9 @@ export class WrapperLayoutComponent implements OnInit {
     this.router.navigateByUrl("/calendar");
   }
 
+  onClickListItemAnnouncement() {
+    this.active = 'announcements'
+    this.router.navigateByUrl("/announcements");
 
+  }
 }

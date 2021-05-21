@@ -44,9 +44,17 @@
       </div>
     </div>
     <div class="col-md-3">
-      <div class="container bg-white m-4 p-4 border-rounded">
-        <div class="row p-0 m-0">
-          <div class="col"><h4 class="text-bold">Calendar</h4></div>
+      <div class="container bg-white m-4 border-rounded">
+        <div class="row pt-4 mt-4">
+          <div class="col"><h5 class="text-bold">Announcements</h5></div>
+        </div>
+        <div
+          class="row scrolling-wrapper-vertical flex-column flex-nowrap hide-scrollbar"
+          style="max-height: 600px"
+        >
+          <app-announcement-list-item></app-announcement-list-item>
+          <app-announcement-list-item></app-announcement-list-item>
+          <app-announcement-list-item></app-announcement-list-item>
         </div>
       </div>
     </div>

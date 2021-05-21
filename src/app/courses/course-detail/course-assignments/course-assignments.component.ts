@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AssignmentCreateNewComponent } from 'src/app/assignments/assignment-create-new/assignment-create-new.component';
+import { ModalConfig } from 'src/app/assignments/assignment-create-new/modal.config';
 
 @Component({
   selector: 'app-course-assignments',
@@ -10,6 +12,29 @@ export class CourseAssignmentsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+
+  onClickAddAssignment() {
+    this.openModal();
+  }
+
+  @ViewChild('modal') private modalComponent: AssignmentCreateNewComponent
+
+  public modalConfig: ModalConfig = {
+    modalTitle: "New Assignment",
+    onClose: () => {
+      return true
+    },
+    closeButtonLabel: "Close",
+    onCreate: () => {
+      return true;
+    },
+    createButtonLabel: "Create"
+  }
+
+  async openModal() {
+    return await this.modalComponent.open()
   }
 
 }

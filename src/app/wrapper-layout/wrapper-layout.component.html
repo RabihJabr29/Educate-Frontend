@@ -17,6 +17,18 @@
       </a>
       <a
         class="list-group-item list-group-item-action border-0"
+        (click)="onClickListItemAnnouncement()"
+      >
+        <label
+          class="list-text"
+          [ngClass]="{ 'active-list-item': active == 'announcements' }"
+        >
+          <i class="material-icons list-icon">campaign</i>
+          Announcements
+        </label>
+      </a>
+      <a
+        class="list-group-item list-group-item-action border-0"
         (click)="onClickListItemCourses()"
       >
         <label

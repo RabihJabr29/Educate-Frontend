@@ -21,4 +21,16 @@
       {{ assignment.status }}
     </p>
   </div>
+  <div class="col center-elements">
+    <span
+      class="material-icons cursor-pointer edit-color"
+      (click)="onClickEditAssignment()"
+      >edit</span
+    >
+    <span
+      class="material-icons cursor-pointer ms-2 delete-color"
+      (click)="onClickDeleteAssignment()"
+      >delete</span
+    >
+  </div>
 </div>

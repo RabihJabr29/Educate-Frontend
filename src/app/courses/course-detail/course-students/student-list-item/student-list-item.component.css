@@ -1,0 +1,18 @@
+.student-name {
+  font-size: small;
+  color: black(212, 197, 197);
+}
+
+.student-email {
+  font-size: small;
+  color: gray;
+}
+
+.text-size-small {
+  font-size: small;
+}
+
+.center-elements {
+  display: flex;
+  align-items: center;
+}

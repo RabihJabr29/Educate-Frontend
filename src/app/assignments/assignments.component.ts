@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { AssignmentCreateNewComponent } from './assignment-create-new/assignment-create-new.component';
+import { ModalConfig } from './assignment-create-new/modal.config';
 
 @Component({
   selector: 'app-assignments',
@@ -11,5 +13,6 @@ export class AssignmentsComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 
 }

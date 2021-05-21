@@ -29,3 +29,15 @@
     rgb(241, 241, 241) 100%
   );
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.edit-color {
+  color: rgba(50, 128, 201, 0.719);
+}
+
+.delete-color {
+  color: rgb(255, 59, 59);
+}

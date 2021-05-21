@@ -20,4 +20,12 @@ export class AssignmentListItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onClickEditAssignment() {
+    // to be implemented
+
+  }
+
+  onClickDeleteAssignment() {
+
+  }
 }
