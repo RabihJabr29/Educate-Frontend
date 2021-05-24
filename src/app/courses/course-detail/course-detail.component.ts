@@ -31,11 +31,6 @@ export class CourseDetailComponent implements OnInit {
     this.router.navigateByUrl("courses/course-detail/course-assignments");
   }
 
-  onClickNavItemGrades() {
-    this.activeNavItem = "grades";
-    this.router.navigateByUrl("courses/course-detail/course-grades");
-  }
-
   onClickBackArrow() {
     this.router.navigateByUrl("courses");
   }

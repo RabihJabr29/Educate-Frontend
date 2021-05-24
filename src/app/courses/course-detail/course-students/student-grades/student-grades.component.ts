@@ -1,21 +1,21 @@
 import { Component, Injectable, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { ModalConfig } from './modal.config';
+import { StudentGradesModalConfig } from './student-grades-modal.config'
+
 
 @Component({
-  selector: 'app-assignment-create-new',
-  templateUrl: './assignment-create-new.component.html',
-  styleUrls: ['./assignment-create-new.component.css']
+  selector: 'app-student-grades',
+  templateUrl: './student-grades.component.html',
+  styleUrls: ['./student-grades.component.css']
 })
 @Injectable()
-export class AssignmentCreateNewComponent implements OnInit {
-  @Input() public modalConfig: ModalConfig;
-  @ViewChild('modal') private modalContent: TemplateRef<AssignmentCreateNewComponent>;
+export class StudentGradesComponent implements OnInit {
+  @Input() public modalConfig: StudentGradesModalConfig;
+  @ViewChild('studentGradesModal') private modalContent: TemplateRef<StudentGradesComponent>;
   private modalRef: NgbModalRef;
 
   model;
-
 
   constructor(private modalService: NgbModal) { }
 
@@ -43,21 +43,4 @@ export class AssignmentCreateNewComponent implements OnInit {
     }
   }
 
-  create() {
-
-  }
-
-  percentage: number;
-  percentageValid: boolean = true;
-  onChangePercentage() {
-    if (this.percentage < 1) {
-      this.percentage = 1;
-      this.percentageValid = false;
-    }
-    else if (this.percentage > 100) {
-      this.percentage = 100;
-      this.percentageValid = false;
-    }
-    else this.percentageValid = true;
-  }
 }

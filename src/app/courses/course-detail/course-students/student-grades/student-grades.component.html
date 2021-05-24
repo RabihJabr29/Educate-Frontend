@@ -1,0 +1,25 @@
+<ng-template #studentGradesModal>
+  <div class="modal-header">
+    <h5 class="modal-title">{{ modalConfig.modalTitle }}</h5>
+  </div>
+  <div class="modal-body">
+    <p>This is the modal body</p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-danger"
+      (click)="close()"
+      *ngIf="
+        modalConfig.hideCloseButton === undefined ||
+        !modalConfig.hideCloseButton()
+      "
+      [disabled]="
+        modalConfig.disableCloseButton !== undefined &&
+        modalConfig.disableCloseButton()
+      "
+    >
+      {{ modalConfig.closeButtonLabel }}
+    </button>
+  </div>
+</ng-template>

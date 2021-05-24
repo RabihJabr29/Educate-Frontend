@@ -23,12 +23,14 @@ import { CourseDetailComponent } from './courses/course-detail/course-detail.com
 import { CourseContentComponent } from './courses/course-detail/course-content/course-content.component';
 import { CourseStudentsComponent } from './courses/course-detail/course-students/course-students.component';
 import { CourseAssignmentsComponent } from './courses/course-detail/course-assignments/course-assignments.component';
-import { CourseGradesComponent } from './courses/course-detail/course-grades/course-grades.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { StudentListItemComponent } from './courses/course-detail/course-students/student-list-item/student-list-item.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
 import { AnnouncementListItemComponent } from './announcements/announcement-list-item/announcement-list-item.component';
 import { AssignmentCreateNewComponent } from './assignments/assignment-create-new/assignment-create-new.component';
+import { StudentGradesComponent } from './courses/course-detail/course-students/student-grades/student-grades.component';
+import { StudentSubmissionsComponent } from './courses/course-detail/course-students/student-submissions/student-submissions.component';
+import { ContentElementComponent } from './courses/course-detail/course-content/content-element/content-element.component';
 
 // import { AuthInterceptor } from './auth/auth-interceptor';
 
@@ -63,7 +65,6 @@ const routes: Routes = [
           { path: 'course-content', component: CourseContentComponent },
           { path: 'course-students', component: CourseStudentsComponent },
           { path: 'course-assignments', component: CourseAssignmentsComponent },
-          { path: 'course-grades', component: CourseGradesComponent }
         ]
       },
 
@@ -85,12 +86,14 @@ const routes: Routes = [
     CourseContentComponent,
     CourseStudentsComponent,
     CourseAssignmentsComponent,
-    CourseGradesComponent,
     CalendarComponent,
     StudentListItemComponent,
     AnnouncementsComponent,
     AnnouncementListItemComponent,
-    AssignmentCreateNewComponent
+    AssignmentCreateNewComponent,
+    StudentGradesComponent,
+    StudentSubmissionsComponent,
+    ContentElementComponent
   ],
   imports: [
     BrowserModule,

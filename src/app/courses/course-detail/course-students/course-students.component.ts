@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { StudentGradesModalConfig } from './student-grades/student-grades-modal.config';
+import { StudentGradesComponent } from './student-grades/student-grades.component';
 
 @Component({
   selector: 'app-course-students',
@@ -12,4 +15,28 @@ export class CourseStudentsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  @ViewChild('studentGradesModal') private modalComponent: StudentGradesComponent
+
+  public modalConfig: StudentGradesModalConfig = {
+    modalTitle: "Student Grades",
+    onClose: () => {
+      return true
+    },
+    closeButtonLabel: "Close",
+  }
+
+  async openModal() {
+    return await this.modalComponent.open();
+  }
+
+  onClickStudent() {
+    this.openModal();
+  }
+
+  onClickAddNewStudent() {
+    // I to be
+  }
+
 }
+
