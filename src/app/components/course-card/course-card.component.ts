@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./course-card.component.css']
 })
 export class CourseCardComponent implements OnInit {
+
   courseCode: String = "CSC490";
   courseName: String = "Web Programming";
   courseParticipantsNumber: Number = 21;
@@ -15,7 +16,7 @@ export class CourseCardComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    
+
   }
 
   onClickCourseCard() {

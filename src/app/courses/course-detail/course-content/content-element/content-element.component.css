@@ -6,3 +6,9 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
+.click-effect:active {
+  overflow-x: unset;
+  box-shadow: 1 1px #666;
+  transform: translateY(4px);
+}

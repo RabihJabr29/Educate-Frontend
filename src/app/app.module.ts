@@ -31,6 +31,7 @@ import { AssignmentCreateNewComponent } from './assignments/assignment-create-ne
 import { StudentGradesComponent } from './courses/course-detail/course-students/student-grades/student-grades.component';
 import { StudentSubmissionsComponent } from './courses/course-detail/course-students/student-submissions/student-submissions.component';
 import { ContentElementComponent } from './courses/course-detail/course-content/content-element/content-element.component';
+import { StudentGradeListItemComponent } from './courses/course-detail/course-students/student-grades/student-grade-list-item/student-grade-list-item.component';
 
 // import { AuthInterceptor } from './auth/auth-interceptor';
 
@@ -93,7 +94,8 @@ const routes: Routes = [
     AssignmentCreateNewComponent,
     StudentGradesComponent,
     StudentSubmissionsComponent,
-    ContentElementComponent
+    ContentElementComponent,
+    StudentGradeListItemComponent
   ],
   imports: [
     BrowserModule,
@@ -102,6 +104,7 @@ const routes: Routes = [
     FormsModule,
     NgbModule,
     FullCalendarModule,
+    HttpClientModule,
     RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })
   ],
   providers: [

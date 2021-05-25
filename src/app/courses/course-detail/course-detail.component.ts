@@ -10,10 +10,9 @@ export class CourseDetailComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  activeNavItem: string;
+  activeNavItem: string = "course-content";
 
   ngOnInit(): void {
-    this.activeNavItem = "course-content";
   }
 
   onClickNavItemCourseContent() {
@@ -33,5 +32,9 @@ export class CourseDetailComponent implements OnInit {
 
   onClickBackArrow() {
     this.router.navigateByUrl("courses");
+  }
+
+  onClickAddAssignment() {
+    // add assignment
   }
 }

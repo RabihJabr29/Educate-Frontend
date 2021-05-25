@@ -46,3 +46,24 @@
 .hover {
   cursor: pointer;
 }
+
+.center-elements {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-button {
+  color: grey;
+  cursor: pointer;
+}
+
+.larger {
+  font-size: xx-large;
+}
+
+.color-red {
+  color: white;
+  background-color: rgb(255, 55, 105);
+  border-color: rgb(255, 55, 105);
+}

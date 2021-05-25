@@ -1,9 +1,21 @@
 <ng-template #studentGradesModal>
   <div class="modal-header">
-    <h5 class="modal-title">{{ modalConfig.modalTitle }}</h5>
+    <div class="row">
+      <div class="col">
+        <p class="course-code mb-0">{{ student.name }}</p>
+        <p class="course-title mb-0">{{ student.major }}</p>
+        <label class="card-course-text-small">
+          {{ student.email }}
+        </label>
+      </div>
+    </div>
   </div>
-  <div class="modal-body">
-    <p>This is the modal body</p>
+  <div class="modal-body p-3 m-3">
+    <app-student-grade-list-item></app-student-grade-list-item>
+    <app-student-grade-list-item></app-student-grade-list-item>
+    <app-student-grade-list-item></app-student-grade-list-item>
+    <app-student-grade-list-item></app-student-grade-list-item>
+    <app-student-grade-list-item></app-student-grade-list-item>
   </div>
   <div class="modal-footer">
     <button

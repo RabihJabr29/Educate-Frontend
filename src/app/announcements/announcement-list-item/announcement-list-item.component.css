@@ -22,3 +22,11 @@
   align-items: center;
   justify-content: center;
 }
+
+.text-small {
+  font-size: small;
+}
+
+.text-smaller {
+  font-size: smaller;
+}

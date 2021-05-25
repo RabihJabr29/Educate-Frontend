@@ -12,7 +12,6 @@ export class CourseContentComponent implements OnInit {
   displayedElements;
 
   constructor() {
-
   }
 
   ngOnInit(): void {

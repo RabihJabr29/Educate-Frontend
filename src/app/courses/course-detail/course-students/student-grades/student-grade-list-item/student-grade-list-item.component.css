@@ -3,11 +3,16 @@
   color: gray;
 }
 
-.open {
+.list-item-text-small {
+  font-size: small;
+  color: gray;
+}
+
+.graded {
   color: rgb(20, 179, 41);
 }
 
-.closed {
+.submitted {
   color: rgb(223, 61, 61);
 }
 
@@ -32,12 +37,4 @@
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.edit-color {
-  color: rgba(50, 128, 201, 0.719);
-}
-
-.delete-color {
-  color: rgb(255, 59, 59);
 }

@@ -54,6 +54,25 @@
               >
             </nav>
           </div>
+          <div class="col pe-5" *ngIf="activeNavItem == 'assignments'">
+            <button
+              class="
+                btn btn-outline-secondary
+                rounded-circle
+                float-end
+                p-0
+                mt-3
+                me-4
+                mb-1
+                center-elements
+                color-red
+              "
+              type="button"
+              (click)="onClickAddAssignment()"
+            >
+              <span class="material-icons larger">add</span>
+            </button>
+          </div>
         </div>
         <div>
           <router-outlet></router-outlet>

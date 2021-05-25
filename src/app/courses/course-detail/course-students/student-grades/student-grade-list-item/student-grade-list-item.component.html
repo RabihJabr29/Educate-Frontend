@@ -1,36 +1,26 @@
 <div
   class="row border-rounded background-color-light-gray mt-3 left-coloring"
-  style="height: 50px"
+  style="height: 40px"
 >
   <div class="col center-elements ml-3">
-    <p class="text-bold text-size-small m-0">{{ assignment.courseName }}</p>
+    <p class="text-bold text-size-small m-0">{{ assignment.title }}</p>
   </div>
   <div class="col center-elements">
     <p class="list-item-text text-bold m-0">{{ assignment.type }}</p>
   </div>
   <div class="col center-elements">
     <p class="list-item-text text-bold m-0">
-      {{ assignment.grade }}/{{ assignment.totalGrade }}
+      {{ assignment.studentGrade }}/{{ assignment.maxGrade }}
     </p>
   </div>
   <div class="col center-elements">
-    <p class="list-item-text text-bold m-0">{{ assignment.dueDate }}</p>
+    <p class="list-item-text-small text-bold m-0">
+      {{ assignment.date }}
+    </p>
   </div>
   <div class="col center-elements">
     <p class="list-item-text text-bold m-0" [ngClass]="assignment.status">
       {{ assignment.status }}
     </p>
-  </div>
-  <div class="col center-elements">
-    <span
-      class="material-icons cursor-pointer edit-color"
-      (click)="onClickEditAssignment()"
-      >edit</span
-    >
-    <span
-      class="material-icons cursor-pointer ms-2 delete-color"
-      (click)="onClickDeleteAssignment()"
-      >delete</span
-    >
   </div>
 </div>

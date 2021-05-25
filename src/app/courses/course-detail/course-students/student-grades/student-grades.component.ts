@@ -17,6 +17,12 @@ export class StudentGradesComponent implements OnInit {
 
   model;
 
+  student = {
+    name: "Jeffrey Joumjian",
+    major: "Computer Science",
+    email: "jeffrey.joumjian@lau.edu"
+  }
+
   constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void { }
