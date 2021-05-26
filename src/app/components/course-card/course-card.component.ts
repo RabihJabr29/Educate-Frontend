@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { CoursesService } from 'src/app/courses/courses.service';
+import { Course } from 'src/app/models/course.model';
+import { Section } from 'src/app/models/section.model';
 
 @Component({
   selector: 'app-course-card',
@@ -7,19 +10,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./course-card.component.css']
 })
 export class CourseCardComponent implements OnInit {
-
-  courseCode: String = "CSC490";
-  courseName: String = "Web Programming";
-  courseParticipantsNumber: Number = 21;
-  courseWeeklySchedule = "MWF: 02:00 PM - 02:50 PM";
-
-  constructor(private router: Router) { }
+  @Input() section: Section;
+  course: Course;
+  constructor(private router: Router, private coursesService: CoursesService) { }
 
   ngOnInit(): void {
-
+    let section_course: Course = this.section.course;
+    this.course = {
+      id: section_course.id,
+      name: section_course.name,
+      nameNumber: section_course.nameNumber,
+      description: section_course.description,
+      credits: section_course.credits,
+      department: section_course.department,
+    }
   }
 
   onClickCourseCard() {
+    this.coursesService.currentSection = this.section._id;
+    console.log(this.section._id);
     this.router.navigateByUrl("courses/course-detail")
   }
 }

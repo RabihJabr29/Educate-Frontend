@@ -41,3 +41,7 @@
 .delete-color {
   color: rgb(255, 59, 59);
 }
+
+overflow-scroll {
+  overflow: scroll;
+}

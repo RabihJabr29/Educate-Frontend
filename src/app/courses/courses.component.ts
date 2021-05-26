@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Section } from '../models/section.model';
 import { WrapperService } from '../wrapper-layout/wrapper.service';
 import { CoursesService } from './courses.service';
 
@@ -11,8 +12,10 @@ import { CoursesService } from './courses.service';
 export class CoursesComponent implements OnInit {
   constructor(private coursesService: CoursesService) { }
 
-  ngOnInit(): void {
-    this.coursesService.getCourses();
+  sections: Section[] = [];
+
+  async ngOnInit() {
+    this.sections = await this.coursesService.getCourses();
   }
 
 }

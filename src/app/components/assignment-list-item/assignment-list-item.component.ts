@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Assignment } from 'src/app/models/assignment.model';
 
 @Component({
   selector: 'app-assignment-list-item',
@@ -7,17 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AssignmentListItemComponent implements OnInit {
 
-  assignment = {
-    title: "Web Programming",
-    type: "Assignment",
-    grade: 0,
-    totalGrade: 25,
-    dueDate: "08/01/2020 11:59 PM",
-    status: "closed"
-  }
+  @Input() assignment: Assignment;
   constructor() { }
 
+  assignmentStatus: string = "Open";
+
   ngOnInit(): void {
+    if (this.assignment.isActive) {
+      this.assignmentStatus = "Open";
+    } else {
+      this.assignmentStatus = "Closed";
+    }
   }
 
   onClickEditAssignment() {

@@ -10,15 +10,10 @@
     "
     style="height: 270px"
   >
-    <app-assignment-list-item></app-assignment-list-item>
-    <app-assignment-list-item></app-assignment-list-item>
-    <app-assignment-list-item></app-assignment-list-item>
-    <app-assignment-list-item></app-assignment-list-item>
-    <app-assignment-list-item></app-assignment-list-item
-    ><app-assignment-list-item></app-assignment-list-item
-    ><app-assignment-list-item></app-assignment-list-item>
+    <app-assignment-list-item
+      *ngFor="let assignment of assignments"
+      [assignment]="assignment"
+    ></app-assignment-list-item>
+    <h6 *ngIf="assignments.length == 0">No Assignments yet.</h6>
   </div>
 </div>
-
-<app-assignment-create-new #modal [modalConfig]="modalConfig">
-</app-assignment-create-new>

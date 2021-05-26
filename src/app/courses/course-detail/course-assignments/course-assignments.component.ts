@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { AssignmentCreateNewComponent } from 'src/app/assignments/assignment-create-new/assignment-create-new.component';
-import { ModalConfig } from 'src/app/assignments/assignment-create-new/modal.config';
+import { Component, OnInit } from '@angular/core';
+import { AssignmentsService } from 'src/app/assignments/assignments.service';
+import { Assignment } from 'src/app/models/assignment.model';
+import { CoursesService } from '../../courses.service';
 
 @Component({
   selector: 'app-course-assignments',
@@ -9,32 +10,15 @@ import { ModalConfig } from 'src/app/assignments/assignment-create-new/modal.con
 })
 export class CourseAssignmentsComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  constructor(private assignemntsService: AssignmentsService, private coursesService: CoursesService) { }
 
 
-  onClickAddAssignment() {
-    this.openModal();
-  }
+  assignments: Assignment[] = [];
 
-  @ViewChild('modal') private modalComponent: AssignmentCreateNewComponent
-
-  public modalConfig: ModalConfig = {
-    modalTitle: "New Assignment",
-    onClose: () => {
-      return true
-    },
-    closeButtonLabel: "Close",
-    onCreate: () => {
-      return true;
-    },
-    createButtonLabel: "Create"
-  }
-
-  async openModal() {
-    return await this.modalComponent.open()
+  async ngOnInit() {
+    let sectionId: string = this.coursesService.currentSection;
+    console.log(sectionId);
+    this.assignments = await this.assignemntsService.getAssignmentsBySectionId(sectionId);
   }
 
 }

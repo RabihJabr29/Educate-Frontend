@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { AssignmentCreateNewComponent } from './assignment-create-new/assignment-create-new.component';
-import { ModalConfig } from './assignment-create-new/modal.config';
+import { Assignment } from '../models/assignment.model';
+import { AssignmentsService } from './assignments.service';
+
 
 @Component({
   selector: 'app-assignments',
@@ -9,10 +10,11 @@ import { ModalConfig } from './assignment-create-new/modal.config';
 })
 export class AssignmentsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private assignmentsService: AssignmentsService) { }
+  assignments: Assignment[] = [];
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.assignments = await this.assignmentsService.getAllAssignments();
+    console.log(this.assignments);
   }
-
-
 }

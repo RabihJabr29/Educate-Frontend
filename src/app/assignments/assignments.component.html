@@ -4,19 +4,11 @@
       <h4 class="text-bold">Assignments</h4>
     </div>
     <div class="row pb-4 pt-2">
-      <app-assignment-list-item></app-assignment-list-item>
-      <app-assignment-list-item></app-assignment-list-item>
-      <app-assignment-list-item></app-assignment-list-item>
-      <app-assignment-list-item></app-assignment-list-item>
-      <app-assignment-list-item></app-assignment-list-item>
-      <app-assignment-list-item></app-assignment-list-item>
-      <app-assignment-list-item></app-assignment-list-item>
-      <app-assignment-list-item></app-assignment-list-item>
-      <app-assignment-list-item></app-assignment-list-item>
-      <app-assignment-list-item></app-assignment-list-item>
-      <app-assignment-list-item></app-assignment-list-item>
-      <app-assignment-list-item></app-assignment-list-item>
-      <app-assignment-list-item></app-assignment-list-item>
+      <app-assignment-list-item
+        *ngFor="let assignment of assignments"
+        [assignment]="assignment"
+      ></app-assignment-list-item>
+      <h6 *ngIf="assignments.length == 0">No Assignments yet.</h6>
     </div>
   </div>
 </div>

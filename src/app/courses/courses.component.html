@@ -19,12 +19,9 @@
     </div>
 
     <div class="row pb-4 pt-2">
-      <div class="col-4 mb-3"><app-course-card></app-course-card></div>
-      <div class="col-4 mb-3"><app-course-card></app-course-card></div>
-      <div class="col-4 mb-3"><app-course-card></app-course-card></div>
-      <div class="col-4 mb-3"><app-course-card></app-course-card></div>
-      <div class="col-4 mb-3"><app-course-card></app-course-card></div>
-      <div class="col-4 mb-3"><app-course-card></app-course-card></div>
+      <div class="col-4 mb-3" *ngFor="let section of sections">
+        <app-course-card [section]="section"></app-course-card>
+      </div>
     </div>
   </div>
 </div>

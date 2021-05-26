@@ -1,24 +1,31 @@
 <div
   class="row border-rounded background-color-light-gray mt-3 left-coloring"
-  style="height: 50px"
+  style="min-height: 50px"
 >
   <div class="col center-elements ml-3">
-    <p class="text-bold text-size-small m-0">{{ assignment.title }}</p>
+    <p class="text-bold text-size-small m-0">
+      {{ assignment.name }}
+    </p>
   </div>
   <div class="col center-elements">
     <p class="list-item-text text-bold m-0">{{ assignment.type }}</p>
   </div>
   <div class="col center-elements">
     <p class="list-item-text text-bold m-0">
-      {{ assignment.grade }}/{{ assignment.totalGrade }}
+      Max Grade: {{ assignment.maxGrade }}
     </p>
   </div>
   <div class="col center-elements">
-    <p class="list-item-text text-bold m-0">{{ assignment.dueDate }}</p>
+    <p class="list-item-text text-bold m-0">
+      {{ assignment.endDate }} {{ assignment.endTime }}
+    </p>
   </div>
   <div class="col center-elements">
-    <p class="list-item-text text-bold m-0" [ngClass]="assignment.status">
-      {{ assignment.status }}
+    <p
+      class="list-item-text text-bold m-0 center-elements center-elements"
+      [ngClass]="assignment.isActive ? 'open' : 'closed'"
+    >
+      {{ assignmentStatus }}
     </p>
   </div>
   <div class="col center-elements">

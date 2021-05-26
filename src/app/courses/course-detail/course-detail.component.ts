@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { AssignmentCreateNewComponent } from 'src/app/assignments/assignment-create-new/assignment-create-new.component';
+import { ModalConfig } from 'src/app/assignments/assignment-create-new/modal.config';
 
 @Component({
   selector: 'app-course-detail',
@@ -34,7 +36,29 @@ export class CourseDetailComponent implements OnInit {
     this.router.navigateByUrl("courses");
   }
 
+  // assignment create new modal
+
+
   onClickAddAssignment() {
-    // add assignment
+    this.openModal();
   }
+
+  @ViewChild('modal') private modalComponent: AssignmentCreateNewComponent
+
+  public modalConfig: ModalConfig = {
+    modalTitle: "New Assignment",
+    onClose: () => {
+      return true
+    },
+    closeButtonLabel: "Close",
+    onCreate: () => {
+      return true;
+    },
+    createButtonLabel: "Create"
+  }
+
+  async openModal() {
+    return await this.modalComponent.open()
+  }
+
 }
