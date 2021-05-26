@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WrapperService } from '../wrapper-layout/wrapper.service';
+import { CoursesService } from './courses.service';
 
 
 @Component({
@@ -8,9 +9,10 @@ import { WrapperService } from '../wrapper-layout/wrapper.service';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements OnInit {
-  constructor() { }
+  constructor(private coursesService: CoursesService) { }
 
   ngOnInit(): void {
+    this.coursesService.getCourses();
   }
 
 }
