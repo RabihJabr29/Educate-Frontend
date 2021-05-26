@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AssignmentListItemComponent implements OnInit {
 
   assignment = {
-    courseName: "Web Programming",
+    title: "Web Programming",
     type: "Assignment",
     grade: 0,
     totalGrade: 25,

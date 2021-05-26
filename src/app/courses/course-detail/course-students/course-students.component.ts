@@ -16,7 +16,7 @@ export class CourseStudentsComponent implements OnInit {
   }
 
 
-  @ViewChild('studentGradesModal') private modalComponent: StudentGradesComponent
+  @ViewChild('Modal') private modalComponent: StudentGradesComponent
 
   public modalConfig: StudentGradesModalConfig = {
     modalTitle: "Student Grades",

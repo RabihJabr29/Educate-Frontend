@@ -1,6 +1,8 @@
 import { Component, Injectable, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { StudentSubmissionModalConfig } from '../student-submission/student-submission-modal.config';
+import { StudentSubmissionComponent } from '../student-submission/student-submission.component';
 import { StudentGradesModalConfig } from './student-grades-modal.config'
 
 
@@ -47,6 +49,28 @@ export class StudentGradesComponent implements OnInit {
       const result = this.modalConfig.onDismiss === undefined || (await this.modalConfig.onDismiss())
       this.modalRef.dismiss(result)
     }
+  }
+
+
+  // nested modal part
+
+  @ViewChild('studentSubmissionModal') private studentSubmissionModalComponent: StudentSubmissionComponent
+
+  public studentSubmissionModalConfig: StudentSubmissionModalConfig = {
+    modalTitle: "Student Submission",
+    onClose: () => {
+      return true
+    },
+    closeButtonLabel: "Close",
+    saveButtonLabel: "Save",
+  }
+
+  async openModal() {
+    return await this.studentSubmissionModalComponent.open();
+  }
+
+  onClickGradeListItem() {
+    this.openModal();
   }
 
 }

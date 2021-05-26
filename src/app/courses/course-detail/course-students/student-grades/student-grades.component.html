@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="modal-body p-3 m-3">
-    <app-student-grade-list-item></app-student-grade-list-item>
+    <app-student-grade-list-item (click)="onClickGradeListItem()"></app-student-grade-list-item>
     <app-student-grade-list-item></app-student-grade-list-item>
     <app-student-grade-list-item></app-student-grade-list-item>
     <app-student-grade-list-item></app-student-grade-list-item>
@@ -34,4 +34,10 @@
       {{ modalConfig.closeButtonLabel }}
     </button>
   </div>
+  <app-student-grades #Modal [modalConfig]="modalConfig"> </app-student-grades>
 </ng-template>
+
+<app-student-submission
+  #studentSubmissionModal
+  [modalConfig]="studentSubmissionModalConfig"
+></app-student-submission>

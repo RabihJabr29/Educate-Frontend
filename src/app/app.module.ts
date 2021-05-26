@@ -32,6 +32,7 @@ import { StudentGradesComponent } from './courses/course-detail/course-students/
 import { StudentSubmissionsComponent } from './courses/course-detail/course-students/student-submissions/student-submissions.component';
 import { ContentElementComponent } from './courses/course-detail/course-content/content-element/content-element.component';
 import { StudentGradeListItemComponent } from './courses/course-detail/course-students/student-grades/student-grade-list-item/student-grade-list-item.component';
+import { StudentSubmissionComponent } from './courses/course-detail/course-students/student-submission/student-submission.component';
 
 // import { AuthInterceptor } from './auth/auth-interceptor';
 
@@ -95,7 +96,8 @@ const routes: Routes = [
     StudentGradesComponent,
     StudentSubmissionsComponent,
     ContentElementComponent,
-    StudentGradeListItemComponent
+    StudentGradeListItemComponent,
+    StudentSubmissionComponent
   ],
   imports: [
     BrowserModule,
