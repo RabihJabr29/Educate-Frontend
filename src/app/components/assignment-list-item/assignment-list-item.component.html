@@ -1,8 +1,17 @@
 <div
-  class="row border-rounded background-color-light-gray mt-3 left-coloring"
+  class="
+    row
+    border-rounded
+    background-color-light-gray
+    mt-3
+    left-coloring
+    cursor-pointer
+    center-elements
+  "
   style="min-height: 50px"
+  (click)="onClickListItem()"
 >
-  <div class="col center-elements ml-3">
+  <div class="col center-elements ml-3 text-center">
     <p class="text-bold text-size-small m-0">
       {{ assignment.name }}
     </p>
@@ -28,7 +37,7 @@
       {{ assignmentStatus }}
     </p>
   </div>
-  <div class="col center-elements">
+  <div class="col center-elements" *ngIf="userType == 'instructor'">
     <span
       class="material-icons cursor-pointer edit-color"
       (click)="onClickEditAssignment()"
@@ -40,4 +49,9 @@
       >delete</span
     >
   </div>
+  <app-assignment-details
+    #Modal
+    [modalConfig]="modalConfig"
+    [assignment]="assignment"
+  ></app-assignment-details>
 </div>

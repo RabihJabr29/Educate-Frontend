@@ -8,26 +8,27 @@
     cursor-pointer
   "
   style="height: 40px"
+  (click)="onClickStudentGradeListItem()"
 >
   <div class="col center-elements ml-3">
-    <p class="text-bold text-size-small m-0">{{ assignment.title }}</p>
+    <p class="text-bold text-size-small m-0">{{ assignment.name }}</p>
   </div>
   <div class="col center-elements">
     <p class="list-item-text text-bold m-0">{{ assignment.type }}</p>
   </div>
   <div class="col center-elements">
     <p class="list-item-text text-bold m-0">
-      {{ assignment.studentGrade }}/{{ assignment.maxGrade }}
+      {{ submissionGrade }} / {{ assignment.maxGrade }}
     </p>
   </div>
   <div class="col center-elements">
     <p class="list-item-text-small text-bold m-0">
-      {{ assignment.date }}
+      {{ assignment.endDate }}
     </p>
   </div>
   <div class="col center-elements">
-    <p class="list-item-text text-bold m-0" [ngClass]="assignment.status">
-      {{ assignment.status }}
+    <p class="list-item-text text-bold m-0" [ngClass]="submissionStatus">
+      {{ submissionStatus }}
     </p>
   </div>
 </div>

@@ -1,9 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
 
-import { Observable, throwError } from 'rxjs';
-import { async } from 'rxjs/internal/scheduler/async';
-import { catchError, retry } from 'rxjs/operators';
 import { Section } from '../models/section.model';
 
 @Injectable({
@@ -11,15 +8,24 @@ import { Section } from '../models/section.model';
 })
 export class CoursesService {
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private authService: AuthService) { }
+  allSemestersSections: Section[] = [];
   sections: Section[] = [];
   currentSection: string;
+  currentSectionObject: Section;
 
   async getCoursesFromServer() {
     try {
+      let backendURL: string;
+      let userType = this.authService.getUserType();
+      let userId: string = this.authService.getUserId();
 
-      let res = await fetch("api/instructors/60ad3a09c43d1a2d74cf0820/sections", { method: 'GET' });
+      if (userType == 'instructor') {
+        backendURL = "api/instructors/" + userId + "/sections";
+      } else {
+        backendURL = "api/students/" + userId + "/courses";
+      }
+      let res = await fetch(backendURL, { method: 'GET', credentials: 'include' },);
       if (res.status == 200) {
         let sections_object = await res.json();
         sections_object.forEach(section => {
@@ -36,7 +42,7 @@ export class CoursesService {
             assignments: section.assignments, // ids
             students: section.students, // ids
           }
-          this.sections.push(newSection)
+          this.allSemestersSections.push(newSection)
         });
       } else {
         console.log(await res.text());
@@ -48,8 +54,45 @@ export class CoursesService {
 
   async getCourses() {
     this.sections = [];
+    this.allSemestersSections = [];
     await this.getCoursesFromServer();
+    // this.allSemestersSections.forEach((section) => {
+
+    // });
+    this.sections = this.allSemestersSections;
     return [...this.sections];
+  }
+
+  async getCourseByIdFromServer(sectionId: string) {
+    try {
+
+      let res = await fetch("api/sections/" + sectionId, { method: 'GET' });
+      if (res.status == 200) {
+        let section = await res.json();
+        let newSection: Section = {
+          _id: section._id,
+          CRN: section.CRN,
+          course: section.course,
+          semester: section.semester,
+          startDate: section.startDate,
+          endDate: section.endDate,
+          capacity: section.capacity,
+          schedule: section.schedule,
+          instructors: section.instructors, // ids
+          assignments: section.assignments, // ids
+          students: section.students, // ids
+        }
+        this.currentSectionObject = newSection;
+      } else {
+        console.log(await res.text());
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async getCourseById(sectionId: string) {
+    await this.getCourseByIdFromServer(sectionId);
   }
 
 }

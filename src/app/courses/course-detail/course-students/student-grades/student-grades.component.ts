@@ -1,8 +1,12 @@
 import { Component, Injectable, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { CoursesService } from 'src/app/courses/courses.service';
+import { Student } from 'src/app/models/student.model';
+import { Submission } from 'src/app/models/submission.model';
 import { StudentSubmissionModalConfig } from '../student-submission/student-submission-modal.config';
 import { StudentSubmissionComponent } from '../student-submission/student-submission.component';
+import { StudentsService } from '../students.service';
 import { StudentGradesModalConfig } from './student-grades-modal.config'
 
 
@@ -19,18 +23,22 @@ export class StudentGradesComponent implements OnInit {
 
   model;
 
-  student = {
-    name: "Jeffrey Joumjian",
-    major: "Computer Science",
-    email: "jeffrey.joumjian@lau.edu"
+  @Input() student: Student;
+
+  studentSubmissions: Submission[] = [];
+
+  constructor(private modalService: NgbModal, private studentsService: StudentsService, private coursesService: CoursesService) { }
+
+  async ngOnInit() {
+
   }
 
-  constructor(private modalService: NgbModal) { }
 
-  ngOnInit(): void { }
-
-
-  open(): Promise<boolean> {
+  async open(): Promise<boolean> {
+    let currentSectionId = this.coursesService.currentSection;
+    this.student = this.studentsService.currentStudent;
+    this.studentSubmissions = [];
+    this.studentSubmissions = await this.studentsService.getSubmissionsByStudentId(this.student._id, currentSectionId);
     return new Promise<boolean>(resolve => {
       this.modalRef = this.modalService.open(this.modalContent, { size: 'lg', backdrop: 'static' })
       this.modalRef.result.then(resolve, resolve)

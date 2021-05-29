@@ -2,8 +2,7 @@
   <div class="modal-header">
     <div class="row">
       <div class="col">
-        <p class="course-code mb-0">{{ student.name }}</p>
-        <p class="course-title mb-0">{{ student.major }}</p>
+        <p class="course-code mb-0">{{ student.fullName }}</p>
         <label class="card-course-text-small">
           {{ student.email }}
         </label>
@@ -11,11 +10,12 @@
     </div>
   </div>
   <div class="modal-body p-3 m-3">
-    <app-student-grade-list-item (click)="onClickGradeListItem()"></app-student-grade-list-item>
-    <app-student-grade-list-item></app-student-grade-list-item>
-    <app-student-grade-list-item></app-student-grade-list-item>
-    <app-student-grade-list-item></app-student-grade-list-item>
-    <app-student-grade-list-item></app-student-grade-list-item>
+    <app-student-grade-list-item
+      *ngFor="let submission of studentSubmissions"
+      (click)="onClickGradeListItem()"
+      [submission]="submission"
+    ></app-student-grade-list-item>
+    <h6 *ngIf="studentSubmissions.length == 0">No submissions yet.</h6>
   </div>
   <div class="modal-footer">
     <button

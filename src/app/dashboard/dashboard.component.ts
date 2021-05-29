@@ -18,16 +18,17 @@ export class DashboardComponent implements OnInit {
   assignments: Assignment[] = [];
 
   async ngOnInit() {
-
     this.sections = await this.coursesService.getCourses();
     this.assignments = await this.assignmentsService.getAllAssignments();
-
   }
-
 
   onClickViewCourses() {
     this.router.navigateByUrl("/courses");
     this.wrapperService.navigateTo("courses");
   }
 
+  onClickViewAssignments() {
+    this.router.navigateByUrl("/assignments");
+    this.wrapperService.navigateTo("assignments");
+  }
 }

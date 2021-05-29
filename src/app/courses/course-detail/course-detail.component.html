@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="currentCourse">
   <div class="col">
     <div class="card border-rounded shadow m-4">
       <div
@@ -15,13 +15,15 @@
       <div class="card-body">
         <div class="row">
           <div class="col">
-            <p class="course-code mb-0">CSC-490</p>
-            <p class="course-title mb-0">Web Development</p>
+            <p class="course-code mb-0">
+              {{ currentCourse.code }} - CRN: {{ currentSection.CRN }}
+            </p>
+            <p class="course-title mb-0">{{ currentCourse.name }}</p>
             <label class="card-course-text-small">
               <i class="material-icons icon-grey card-course-icon mr-2"
                 >query_builder</i
               >
-              TTH - 01:00 PM - 2:15 - 1hr 15min
+              {{ currentSection.schedule }}
             </label>
           </div>
         </div>
@@ -39,22 +41,39 @@
               <a
                 class="navbar-brand nav-title ml-3 hover"
                 [ngClass]="{
-                  'active-nav-item': activeNavItem == 'students'
-                }"
-                (click)="onClickNavItemStudents()"
-                >Students</a
-              >
-              <a
-                class="navbar-brand nav-title ml-3 hover"
-                [ngClass]="{
                   'active-nav-item': activeNavItem == 'assignments'
                 }"
                 (click)="onClickNavItemAssignments()"
                 >Assignments</a
               >
+              <a
+                class="navbar-brand nav-title ml-3 hover"
+                [ngClass]="{
+                  'active-nav-item': activeNavItem == 'announcements'
+                }"
+                (click)="onClickNavItemAnnouncements()"
+                >Announcements</a
+              >
+              <a
+                class="navbar-brand nav-title ml-3 hover"
+                [ngClass]="{
+                  'active-nav-item': activeNavItem == 'students'
+                }"
+                *ngIf="userType == 'instructor'"
+                (click)="onClickNavItemStudents()"
+                >Students</a
+              >
             </nav>
           </div>
-          <div class="col pe-5" *ngIf="activeNavItem == 'assignments'">
+          <div
+            class="col pe-5"
+            *ngIf="
+              (activeNavItem == 'assignments' ||
+                activeNavItem == 'course-content' ||
+                activeNavItem == 'announcements') &&
+              userType == 'instructor'
+            "
+          >
             <button
               class="
                 btn btn-outline-secondary
@@ -68,7 +87,7 @@
                 color-red
               "
               type="button"
-              (click)="onClickAddAssignment()"
+              (click)="onClickAdd()"
             >
               <span class="material-icons larger">add</span>
             </button>

@@ -1,6 +1,6 @@
 <div class="container background-color-gray h-100">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-lg-8">
       <div class="container bg-white m-4 p-4 border-rounded">
         <div class="row p-0 m-0">
           <div class="col"><h4 class="text-bold">Courses</h4></div>
@@ -29,7 +29,10 @@
         <div class="row p-0 m-0">
           <div class="col"><h4 class="text-bold">Assignments</h4></div>
           <div class="col float-right text-right">
-            <button class="btn btn-link-custom">
+            <button
+              class="btn btn-link-custom"
+              (click)="onClickViewAssignments()"
+            >
               <i class="material-icons label-icon mr-1">visibility</i
               ><span>view all</span>
             </button>
@@ -41,6 +44,8 @@
             scrolling-wrapper-vertical
             flex-column flex-nowrap
             pb-4
+            ps-4
+            pe-4
             pt-2
             hide-scrollbar
           "
@@ -50,10 +55,11 @@
             *ngFor="let assignment of assignments"
             [assignment]="assignment"
           ></app-assignment-list-item>
+          <h6 *ngIf="assignments.length == 0">No assignments added yet.</h6>
         </div>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-lg-3">
       <div class="container bg-white m-4 border-rounded">
         <div class="row pt-4 mt-4">
           <div class="col"><h5 class="text-bold">Announcements</h5></div>

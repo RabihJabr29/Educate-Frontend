@@ -1,5 +1,5 @@
 export interface Assignment {
-  _id: string;
+  _id?: string;
   name: string;
   description: string;
   type: string;
@@ -10,7 +10,7 @@ export interface Assignment {
   endDate: string;
   endTime: string;
   visibility: string;
-  isActive: boolean;
+  isActive?: boolean;
   allowMultipleSubmissions: boolean;
   allowLateSubmissions: boolean;
   isVisible: boolean;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-announcements',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnnouncementsComponent implements OnInit {
 
-  constructor() { }
+  userType: string;
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.userType = this.authService.getUserType();
   }
 
 }

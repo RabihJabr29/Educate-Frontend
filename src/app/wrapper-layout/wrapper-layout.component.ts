@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { WrapperService } from './wrapper.service';
 
 import { Subscription } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-wrapper-layout',
@@ -14,9 +15,9 @@ export class WrapperLayoutComponent implements OnInit {
   toggled: string = "";
   active: string;
   private activePathListenerSubs: Subscription;
+  userType: string;
 
-
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private wrapperService: WrapperService) { }
+  constructor(private router: Router, private wrapperService: WrapperService, private authService: AuthService) { }
   ngOnInit(): void {
     // this.active = this.wrapperService.getActiveStatus();
     this.activePathListenerSubs = this.wrapperService.getActiveStatusListener().subscribe(
@@ -25,6 +26,7 @@ export class WrapperLayoutComponent implements OnInit {
       }
     );
     this.active = this.router.url.slice(1);
+    this.userType = this.authService.getUserType();
   }
 
   toggleMenu(e: Event) {
@@ -59,5 +61,11 @@ export class WrapperLayoutComponent implements OnInit {
     this.active = 'announcements'
     this.router.navigateByUrl("/announcements");
 
+  }
+
+  onClickLogout() {
+    this.active = '';
+    this.authService.logout();
+    this.router.navigateByUrl("auth/login");
   }
 }

@@ -8,12 +8,12 @@
   color: gray;
 }
 
-.graded {
+.Graded {
   color: rgb(20, 179, 41);
 }
 
-.submitted {
-  color: rgb(223, 61, 61);
+.Submitted {
+  color: rgb(255, 202, 28);
 }
 
 .text-size-small {

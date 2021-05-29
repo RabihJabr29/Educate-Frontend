@@ -18,6 +18,7 @@
       <a
         class="list-group-item list-group-item-action border-0"
         (click)="onClickListItemAnnouncement()"
+        *ngIf="userType == 'student'"
       >
         <label
           class="list-text"
@@ -84,11 +85,17 @@
               <i class="material-icons icon-grey">notifications_active</i>
             </span>
           </li>
-          <li class="nav-item">
-            <span class="btn">
-              <i class="material-icons icon-grey">person</i>
-            </span>
-          </li>
+          <div ngbDropdown class="text-right">
+            <li class="nav-item" id="dropdownBasic1" ngbDropdownToggle>
+              <span class="btn">
+                <i class="material-icons icon-grey">person</i>
+              </span>
+            </li>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem>Profile</button>
+              <button ngbDropdownItem (click)="onClickLogout()">Logout</button>
+            </div>
+          </div>
         </ul>
       </div>
     </nav>

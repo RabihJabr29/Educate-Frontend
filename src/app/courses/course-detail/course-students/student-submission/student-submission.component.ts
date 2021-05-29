@@ -2,6 +2,12 @@ import { Component, Injectable, Input, OnInit, ViewChild, TemplateRef } from '@a
 
 import { StudentSubmissionModalConfig } from './student-submission-modal.config';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Submission } from 'src/app/models/submission.model';
+import { Assignment } from 'src/app/models/assignment.model';
+import { Student } from 'src/app/models/student.model';
+import { StudentsService } from '../students.service';
+import { AuthService } from 'src/app/auth/auth.service';
+import { CoursesService } from 'src/app/courses/courses.service';
 
 @Component({
   selector: 'app-student-submission',
@@ -16,27 +22,24 @@ export class StudentSubmissionComponent implements OnInit {
 
   model;
 
-  student = {
-    name: "Jeffrey Joumjian",
-    major: "Computer Science",
-    email: "jeffrey.joumjian@lau.edu"
-  }
+  submission: Submission;
+  assignment: Assignment;
+  student: Student;
+  submissionStatus: string;
 
-  assignment = {
-    title: "Web Programming",
-    type: "Assignment",
-    grade: 0,
-    maxGrade: 25,
-    dueDate: "08/01/2020 11:59 PM",
-    status: "closed"
-  }
-
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private studentsService: StudentsService, private authService: AuthService, private coursesServices: CoursesService) { }
 
   ngOnInit(): void { }
 
 
   open(): Promise<boolean> {
+    this.student = this.studentsService.currentStudent;
+    this.submission = this.studentsService.currentSubmission;
+    this.assignment = this.submission.assignment;
+    this.submissionStatus = this.submission.isGraded ? "Graded" : "Submitted";
+    this.gradeInput = this.submission.grade;
+    this.commentsInput = this.submission.comments;
+    console.log(this.submission)
     return new Promise<boolean>(resolve => {
       this.modalRef = this.modalService.open(this.modalContent, { size: 'lg', backdrop: 'static' })
       this.modalRef.result.then(resolve, resolve)
@@ -57,7 +60,31 @@ export class StudentSubmissionComponent implements OnInit {
     }
   }
 
+  gradeInput: number;
+  commentsInput: string;
+  gradeValid: boolean = true;
+
+  onChangeGrade(event: Event) {
+    let value = parseInt((event.target as HTMLInputElement).value);
+
+    if (value > this.assignment.maxGrade) {
+      this.gradeInput = this.assignment.maxGrade;
+      (event.target as HTMLInputElement).value = this.assignment.maxGrade + "";
+    }
+    if (value < 0) {
+      this.gradeInput = 0;
+      (event.target as HTMLInputElement).value = "0";
+    }
+  }
+
   save() {
     // save notes + grade
+    if (this.gradeInput == null) this.gradeValid = false;
+    console.log(this.submission._id);
+    this.studentsService.gradeAssignment(this.submission._id, this.gradeInput, this.commentsInput);
+    this.studentsService.getSubmissionsByStudentIdFromServer(this.authService.getUserId(), this.coursesServices.currentSection);
+    this.close();
   }
+
 }
+

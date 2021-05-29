@@ -17,8 +17,13 @@ export class CourseAssignmentsComponent implements OnInit {
 
   async ngOnInit() {
     let sectionId: string = this.coursesService.currentSection;
-    console.log(sectionId);
     this.assignments = await this.assignemntsService.getAssignmentsBySectionId(sectionId);
+    this.assignemntsService.assignmentsChanged.subscribe(async flag => {
+      if (flag) {
+        let sectionId: string = this.coursesService.currentSection;
+        this.assignments = await this.assignemntsService.getAssignmentsBySectionId(sectionId);
+      }
+    });
   }
 
 }

@@ -19,7 +19,7 @@ export class CourseCardComponent implements OnInit {
     this.course = {
       id: section_course.id,
       name: section_course.name,
-      nameNumber: section_course.nameNumber,
+      code: section_course.code,
       description: section_course.description,
       credits: section_course.credits,
       department: section_course.department,
@@ -28,7 +28,6 @@ export class CourseCardComponent implements OnInit {
 
   onClickCourseCard() {
     this.coursesService.currentSection = this.section._id;
-    console.log(this.section._id);
     this.router.navigateByUrl("courses/course-detail")
   }
 }

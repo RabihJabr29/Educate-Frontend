@@ -1,19 +1,16 @@
-<div class="container" *ngIf="userType == 'student'">
-  <div class="row bg-white m-3 p-3 border-rounded">
-    <div class="col">
-      <h4 class="text-bold">Announcements</h4>
-    </div>
-
+<div class="container-fluid rounded-3 p-3">
+  <div class="row">
     <div
       class="
         row
+        p-3
         scrolling-wrapper-vertical
         flex-column flex-nowrap
         pb-4
         pt-2
         hide-scrollbar
       "
-      style="height: 500px"
+      style="height: 300px"
     >
       <app-announcement-list-item></app-announcement-list-item>
       <app-announcement-list-item></app-announcement-list-item>
@@ -21,6 +18,16 @@
       <app-announcement-list-item></app-announcement-list-item>
       <app-announcement-list-item></app-announcement-list-item>
       <app-announcement-list-item></app-announcement-list-item>
+
+      <!--
+      <app-student-list-item
+        *ngFor="let student of students"
+        [student]="student"
+        (click)="onClickAnnouncement()"
+        class="cursor-pointer"
+      ></app-student-list-item>
+       <h6 *ngIf="students.length == 0">No students added yet.</h6>
+      -->
     </div>
   </div>
 </div>

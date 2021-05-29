@@ -5,13 +5,24 @@
   <div class="modal-body">
     <form (submit)="create()" #loginForm="ngForm">
       <div class="form-group">
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>Assignment</option>
-          <option>Quiz</option>
-          <option>Exam</option>
+        <label for="typeOfAssignment">Type:</label>
+        <select
+          class="form-control"
+          id="typeOfAssignment"
+          name="typeOfAssignment"
+          ngModel
+          [(ngModel)]="typeInput"
+        >
+          <option ngValue="assignment">Assignment</option>
+          <option ngValue="quiz">Quiz</option>
+          <option ngValue="exam">Exam</option>
         </select>
+        <span class="text-danger span-error-message" *ngIf="!typeValid">
+          Please choose a type</span
+        >
       </div>
       <div class="form-group">
+        <label for="validationTitle">Title:</label>
         <input
           type="text"
           name="title"
@@ -19,57 +30,60 @@
           ngModel
           placeholder="Title"
           minlength="8"
-          #emailInput="ngModel"
           required
           class="form-control"
+          [(ngModel)]="titleInput"
         />
-        <span class="text-danger span-error-message" *ngIf="true">
-          Please enter a valid Assignment Title</span
+        <span class="text-danger span-error-message" *ngIf="!titleValid">
+          Please enter a valid Assignment Title (minimum lenth: 4)</span
         >
       </div>
       <div class="form-group mb-4">
+        <label for="description">Description:</label>
         <textarea
           type="text"
           name="description"
+          id="description"
           ngModel
           placeholder="Description"
-          #descriptionInput="ngModel"
+          [(ngModel)]="descriptionInput"
           autocomplete="off"
           class="form-control"
           required
         ></textarea>
-        <span class="text-danger span-error-message" *ngIf="true">
-          Password is incorrect</span
+        <span class="text-danger span-error-message" *ngIf="!descriptionValid">
+          Please enter a description</span
         >
       </div>
 
       <div class="form-group">
+        <label for="maxgrade">Max Grade:</label>
         <input
           type="number"
           name="Max Grade"
           id="maxgrade"
           ngModel
           placeholder="Max Grade"
-          #maxGradeInput="ngModel"
+          [(ngModel)]="maxGradeInput"
           required
           class="form-control"
         />
-        <span class="text-danger span-error-message" *ngIf="true">
-          Please enter a number</span
+        <span class="text-danger span-error-message" *ngIf="!maxGradeValid">
+          Please enter a positive number</span
         >
       </div>
       <div class="form-group">
+        <label for="percentage">Percentage:</label>
         <input
           type="number"
           name="Percentage"
-          id="maxgrade"
+          id="percentage"
           ngModel
           placeholder="Percentage %"
-          #percentageInput="ngModel"
           required
           class="form-control"
           (change)="onChangePercentage()"
-          [(ngModel)]="percentage"
+          [(ngModel)]="percentageInput"
         />
         <span class="text-danger span-error-message" *ngIf="!percentageValid">
           Please enter a valid percentage</span
@@ -78,38 +92,96 @@
       <div class="form-group row">
         <div class="col">
           <label for="startDate">Start Date:</label>
-          <input class="form-control" type="date" id="startDate" />
+          <input
+            class="form-control"
+            type="date"
+            [min]="today"
+            id="startDate"
+            name="startDate"
+            ngModel
+            [(ngModel)]="startDateInput"
+          />
         </div>
-        <span class="text-danger span-error-message" *ngIf="true">
+        <span class="text-danger span-error-message" *ngIf="!startDateValid">
           Please choose a valid date</span
         >
       </div>
       <div class="form-group row">
         <div class="col">
           <label for="startTime">Start Time:</label>
-          <input class="form-control" type="time" id="startTime" />
+          <input
+            class="form-control"
+            type="time"
+            id="startTime"
+            name="startTime"
+            ngModel
+            [(ngModel)]="startTimeInput"
+          />
         </div>
-        <span class="text-danger span-error-message" *ngIf="true">
+        <span class="text-danger span-error-message" *ngIf="!startTimeValid">
           Please choose a valid time</span
         >
       </div>
       <div class="form-group row">
         <div class="col">
           <label for="endDate">End Date:</label>
-          <input class="form-control" type="date" id="endDate" />
+          <input
+            class="form-control"
+            type="date"
+            [min]="today"
+            id="endDate"
+            name="endDate"
+            ngModel
+            [(ngModel)]="endDateInput"
+          />
         </div>
-        <span class="text-danger span-error-message" *ngIf="true">
+        <span class="text-danger span-error-message" *ngIf="!endDateValid">
           Please choose a valid date</span
         >
       </div>
       <div class="form-group row">
         <div class="col">
           <label for="endTime">End Time:</label>
-          <input class="form-control" type="time" id="endTime" />
+          <input
+            class="form-control"
+            type="time"
+            id="endTime"
+            name="endTime"
+            ngModel
+            [(ngModel)]="endTimeInput"
+          />
         </div>
-        <span class="text-danger span-error-message" *ngIf="true">
+        <span class="text-danger span-error-message" *ngIf="!endTimeValid">
           Please choose a valid time</span
         >
+      </div>
+      <div class="form-group row">
+        <div class="col-12 ps-5">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            name="lateSubmissions"
+            id="flexRadioDefault1"
+            ngModel
+            [(ngModel)]="allowLateSubmissions"
+          />
+          <label class="form-check-label" for="flexRadioDefault1">
+            Allow Late Submissions
+          </label>
+        </div>
+        <div class="col-12 ps-5">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            name="multipleSubmissions"
+            id="flexRadioDefault2"
+            ngModel
+            [(ngModel)]="allowMultipleSubmissions"
+          />
+          <label class="form-check-label" for="flexRadioDefault2">
+            Allow Multiple Submissions
+          </label>
+        </div>
       </div>
       <div class="form-group row">
         <div class="col">
@@ -118,6 +190,7 @@
             class="form-control"
             type="file"
             id="formFileMultiple"
+            name="formFileMultiple"
             multiple
           />
         </div>
@@ -153,7 +226,7 @@
         modalConfig.disableCreateButton()
       "
     >
-      {{ modalConfig.createButtonLabel }}
+      {{ createEditButtonLabel }}
     </button>
   </div>
 </ng-template>

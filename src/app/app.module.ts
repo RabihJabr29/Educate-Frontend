@@ -33,6 +33,11 @@ import { StudentSubmissionsComponent } from './courses/course-detail/course-stud
 import { ContentElementComponent } from './courses/course-detail/course-content/content-element/content-element.component';
 import { StudentGradeListItemComponent } from './courses/course-detail/course-students/student-grades/student-grade-list-item/student-grade-list-item.component';
 import { StudentSubmissionComponent } from './courses/course-detail/course-students/student-submission/student-submission.component';
+import { StudentsService } from './courses/course-detail/course-students/students.service';
+import { AuthGuard } from './auth/auth.guard';
+import { CourseAnnouncementsComponent } from './courses/course-detail/course-announcements/course-announcements.component';
+import { AnnouncementCreateNewComponent } from './announcements/announcement-create-new/announcement-create-new.component';
+import { AssignmentDetailsComponent } from './assignments/assignment-details/assignment-details.component';
 
 // import { AuthInterceptor } from './auth/auth-interceptor';
 
@@ -51,6 +56,7 @@ const routes: Routes = [
   {
     path: '',
     component: WrapperLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
@@ -58,7 +64,6 @@ const routes: Routes = [
       { path: 'calendar', component: CalendarComponent },
       { path: 'assignments', component: AssignmentsComponent },
       { path: 'announcements', component: AnnouncementsComponent },
-
       {
         path: 'courses/course-detail',
         component: CourseDetailComponent,
@@ -67,7 +72,9 @@ const routes: Routes = [
           { path: 'course-content', component: CourseContentComponent },
           { path: 'course-students', component: CourseStudentsComponent },
           { path: 'course-assignments', component: CourseAssignmentsComponent },
-        ]
+          { path: 'course-announcements', component: CourseAnnouncementsComponent }
+        ],
+
       },
 
     ]
@@ -97,7 +104,10 @@ const routes: Routes = [
     StudentSubmissionsComponent,
     ContentElementComponent,
     StudentGradeListItemComponent,
-    StudentSubmissionComponent
+    StudentSubmissionComponent,
+    CourseAnnouncementsComponent,
+    AnnouncementCreateNewComponent,
+    AssignmentDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -110,6 +120,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })
   ],
   providers: [
+    StudentsService,
+    AuthGuard,
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],

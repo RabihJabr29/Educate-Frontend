@@ -10,11 +10,12 @@ import { Subscription } from 'rxjs';
 })
 
 export class LoginComponent implements OnInit, OnDestroy {
-  isLoading: boolean = false;
   private authStatusSubs: Subscription;
-  constructor(private authService: AuthService) { }
-
   formInvalid: boolean = false;
+
+  constructor(private authService: AuthService) {
+    this.authService.authInvalid.subscribe(flag => this.formInvalid = flag);
+  }
 
   ngOnInit(): void {
     // this.authStatusSubs = this.authService
@@ -31,7 +32,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onLogin(form: NgForm) {
-
     (function () {
       'use strict';
       window.addEventListener('load', function () {
@@ -49,14 +49,13 @@ export class LoginComponent implements OnInit, OnDestroy {
         });
       }, false);
     })();
-    
+
     this.formInvalid = form.invalid;
-    if (form.invalid) {
+    if (form.value.password.invalid || form.value.email.invalid) this.formInvalid = true;
+    if (this.formInvalid) {
       return;
     }
-    console.log("welcome " + form.value.email);
-    // this.isLoading = true;
-    // this.authService.login(form.value.email, form.value.password);
+    this.authService.login(form.value.email, form.value.password);
 
   }
 }

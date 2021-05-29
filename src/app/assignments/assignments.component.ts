@@ -10,11 +10,15 @@ import { AssignmentsService } from './assignments.service';
 })
 export class AssignmentsComponent implements OnInit {
 
-  constructor(private assignmentsService: AssignmentsService) { }
+  constructor(private assignmentsService: AssignmentsService,) { }
   assignments: Assignment[] = [];
 
   async ngOnInit() {
     this.assignments = await this.assignmentsService.getAllAssignments();
-    console.log(this.assignments);
+    this.assignmentsService.assignmentsChanged.subscribe(async flag => {
+      if (flag) {
+        this.assignments = await this.assignmentsService.getAllAssignments();
+      }
+    });
   }
 }
