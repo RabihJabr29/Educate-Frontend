@@ -48,7 +48,6 @@ export class AssignmentListItemComponent implements OnInit {
     }
     this.assignmentsService.selectedAssignment = { ...this.assignment };
     this.openModal();
-    console.log("object");
   }
 
   @ViewChild('Modal') private modalComponent: AssignmentDetailsComponent;

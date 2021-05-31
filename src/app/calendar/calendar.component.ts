@@ -15,7 +15,7 @@ export class CalendarComponent implements OnInit {
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     dateClick: this.handleDateClick.bind(this), // bind is important!
-
+    
   };
 
   @ViewChild('calendar') calendar: FullCalendarComponent;

@@ -1,0 +1,10 @@
+.list-file-style {
+  font-size: smaller;
+  color: rgb(81, 159, 255);
+}
+
+.file-item {
+  cursor: pointer;
+  text-decoration: underline;
+  color: rgb(81, 159, 255);
+}

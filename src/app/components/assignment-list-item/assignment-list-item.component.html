@@ -6,36 +6,36 @@
     mt-3
     left-coloring
     cursor-pointer
-    center-elements
   "
   style="min-height: 50px"
-  (click)="onClickListItem()"
 >
-  <div class="col center-elements ml-3 text-center">
-    <p class="text-bold text-size-small m-0">
-      {{ assignment.name }}
-    </p>
-  </div>
-  <div class="col center-elements">
-    <p class="list-item-text text-bold m-0">{{ assignment.type }}</p>
-  </div>
-  <div class="col center-elements">
-    <p class="list-item-text text-bold m-0">
-      Max Grade: {{ assignment.maxGrade }}
-    </p>
-  </div>
-  <div class="col center-elements">
-    <p class="list-item-text text-bold m-0">
-      {{ assignment.endDate }} {{ assignment.endTime }}
-    </p>
-  </div>
-  <div class="col center-elements">
-    <p
-      class="list-item-text text-bold m-0 center-elements center-elements"
-      [ngClass]="assignment.isActive ? 'open' : 'closed'"
-    >
-      {{ assignmentStatus }}
-    </p>
+  <div class="col-10 center-elements" (click)="onClickListItem()">
+    <div class="col center-elements ml-3 text-center">
+      <p class="text-bold text-size-small m-0">
+        {{ assignment.name }}
+      </p>
+    </div>
+    <div class="col center-elements">
+      <p class="list-item-text text-bold m-0">{{ assignment.type }}</p>
+    </div>
+    <div class="col center-elements">
+      <p class="list-item-text text-bold m-0">
+        Max Grade: {{ assignment.maxGrade }}
+      </p>
+    </div>
+    <div class="col center-elements">
+      <p class="list-item-text text-bold m-0">
+        {{ assignment.endDate }} {{ assignment.endTime }}
+      </p>
+    </div>
+    <div class="col center-elements">
+      <p
+        class="list-item-text text-bold m-0 center-elements center-elements"
+        [ngClass]="assignment.isActive ? 'open' : 'closed'"
+      >
+        {{ assignmentStatus }}
+      </p>
+    </div>
   </div>
   <div class="col center-elements" *ngIf="userType == 'instructor'">
     <span

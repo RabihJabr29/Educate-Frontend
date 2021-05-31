@@ -36,8 +36,6 @@ export class AssignmentCreateNewComponent implements OnInit {
 
   open(): Promise<boolean> {
     let editAssigenment: Assignment = this.assignmentsService.assignementEdit;
-    console.log(editAssigenment)
-
     if (editAssigenment) {
 
       this.createEditButtonLabel = "Save";
@@ -48,20 +46,28 @@ export class AssignmentCreateNewComponent implements OnInit {
       this.descriptionInput = editAssigenment.description;
       this.maxGradeInput = editAssigenment.maxGrade;
       this.startDateInput = editAssigenment.startDate;
-      this.startTimeInput = editAssigenment.startTime;
+      this.startTimeInput = editAssigenment.startTime.slice(0, 5);
       this.endDateInput = editAssigenment.endDate;
-      this.endTimeInput = editAssigenment.endTime;
+      this.endTimeInput = editAssigenment.endTime.slice(0, 5);
       this.allowLateSubmissions = editAssigenment.allowLateSubmissions;
       this.allowMultipleSubmissions = editAssigenment.allowMultipleSubmissions;
+      this.filesToUpload = editAssigenment.files;
+
+      let startDate = this.startDateInput.split("/");
+      let endDate = this.endDateInput.split("/");
+      let startdateFormatted = startDate[2] + '-' + startDate[1] + '-' + startDate[0];
+      let enddateFormatted = endDate[2] + '-' + endDate[1] + '-' + endDate[0];
+      this.startDateInput = startdateFormatted;
+      this.endDateInput = enddateFormatted;
     }
 
-		if(!this.modalService.hasOpenModals()){
-    return new Promise<boolean>(resolve => {
-      this.modalRef = this.modalService.open(this.modalContent, { size: 'lg', backdrop: 'static' })
-      this.modalRef.result.then(resolve, resolve)
-    })
-	}
-		return new Promise<boolean>(resolve => false);
+    if (!this.modalService.hasOpenModals()) {
+      return new Promise<boolean>(resolve => {
+        this.modalRef = this.modalService.open(this.modalContent, { size: 'lg', backdrop: 'static' })
+        this.modalRef.result.then(resolve, resolve)
+      })
+    }
+    return new Promise<boolean>(resolve => false);
   }
 
   async close(): Promise<void> {
@@ -114,8 +120,6 @@ export class AssignmentCreateNewComponent implements OnInit {
 
 
   async create() {
-
-
     if (this.typeInput == null) {
       this.typeValid = false;
       return;
@@ -155,6 +159,7 @@ export class AssignmentCreateNewComponent implements OnInit {
       this.endTimeValid = false;
       return;
     } else this.endTimeValid = true;
+
 
     let startDate = this.startDateInput.split("-");
     let endDate = this.endDateInput.split("-");
@@ -200,6 +205,7 @@ export class AssignmentCreateNewComponent implements OnInit {
       files: []
     }
     if (this.createEditButtonLabel == "Save") {
+      console.log("inside save");
       assignment = {
         assignment_id: this.currentAssignmentId,
         name: this.titleInput,
@@ -220,20 +226,35 @@ export class AssignmentCreateNewComponent implements OnInit {
       }
       let formData = new FormData();
       for (let prop in assignment) {
-				if(!assignment[prop])
-						return;
-        formData.append(prop, assignment[prop]);
+        if (assignment[prop])
+          formData.append(prop, assignment[prop]);
       }
+
       this.filesToUpload.forEach(file => {
         formData.append('files', file);
       });
       this.assignmentsService.editAssignment(formData);
+
+      this.typeInput = null;
+      this.titleInput = null;
+      this.descriptionInput = null;
+      this.startDateInput = null;
+      this.startTimeInput = null;
+      this.endDateInput = null;
+      this.endTimeInput = null;
+      this.maxGradeInput = null;
+      this.percentageInput = null;
+      this.allowLateSubmissions = false;
+      this.allowMultipleSubmissions = false;
+      this.filesToUpload = null;
+      this.close();
+
       return;
     }
     let formData = new FormData();
     for (let prop in assignment) {
-			if(!assignment[prop])
-				return;
+      if (!assignment[prop])
+        return;
       formData.append(prop, assignment[prop]);
     }
     this.filesToUpload.forEach(file => {
@@ -259,9 +280,23 @@ export class AssignmentCreateNewComponent implements OnInit {
   filesUploadValid: boolean = true;
 
   handleFileInput(files: FileList) {
+    this.filesToUpload = [];
     let i;
     for (i = 0; i < files.length; i++) {
       this.filesToUpload.push(files.item(i));
     }
   }
+
+
+  onClickAttachedFile(file) {
+    let blob = new Blob([new Uint8Array(file.data.data)], {
+      type: file.type
+    });
+    let link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = file.name;
+    link.click();
+    link.remove();
+  }
+
 }

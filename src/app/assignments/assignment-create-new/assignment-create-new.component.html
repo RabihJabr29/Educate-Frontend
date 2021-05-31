@@ -196,6 +196,17 @@
           />
         </div>
       </div>
+      <div class="row ms-1">
+        <div class="col">
+          <ul class="list-file-style">
+            <li *ngFor="let item of filesToUpload">
+              <span class="file-item" (click)="onClickAttachedFile(item)">{{
+                item.name
+              }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
     </form>
   </div>
   <div class="modal-footer">
