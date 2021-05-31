@@ -24,11 +24,14 @@ export class CourseDetailComponent implements OnInit {
 
   currentSection: Section;
   currentCourse: Course;
-
+  currentSectionId: string;
   activeNavItem: string = "course-content";
 
   async ngOnInit() {
-    await this.coursesService.getCourseByIdFromServer(this.coursesService.currentSection);
+    this.currentSectionId = localStorage.getItem("currentSection");
+    this.activeNavItem = localStorage.getItem("activeNavItem");
+    this.coursesService.currentSection = this.currentSectionId;
+    await this.coursesService.getCourseByIdFromServer(this.currentSectionId);
     this.currentSection = this.coursesService.currentSectionObject;
     let section_course: Course = this.currentSection.course;
     this.currentCourse = {
@@ -47,21 +50,25 @@ export class CourseDetailComponent implements OnInit {
 
   onClickNavItemCourseContent() {
     this.activeNavItem = "course-content";
+    localStorage.setItem('activeNavItem', this.activeNavItem);
     this.router.navigateByUrl("courses/course-detail/course-content");
   }
 
   onClickNavItemStudents() {
     this.activeNavItem = "students";
+    localStorage.setItem('activeNavItem', this.activeNavItem);
     this.router.navigateByUrl("courses/course-detail/course-students");
   }
 
   onClickNavItemAssignments() {
     this.activeNavItem = "assignments";
+    localStorage.setItem('activeNavItem', this.activeNavItem);
     this.router.navigateByUrl("courses/course-detail/course-assignments");
   }
 
   onClickNavItemAnnouncements() {
     this.activeNavItem = "announcements";
+    localStorage.setItem('activeNavItem', this.activeNavItem);
     this.router.navigateByUrl("courses/course-detail/course-announcements");
   }
 

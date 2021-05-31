@@ -28,6 +28,7 @@ export class CourseCardComponent implements OnInit {
 
   onClickCourseCard() {
     this.coursesService.currentSection = this.section._id;
+    localStorage.setItem("currentSection", this.section._id);
     this.router.navigateByUrl("courses/course-detail")
   }
 }

@@ -205,7 +205,6 @@ export class AssignmentCreateNewComponent implements OnInit {
       files: []
     }
     if (this.createEditButtonLabel == "Save") {
-      console.log("inside save");
       assignment = {
         assignment_id: this.currentAssignmentId,
         name: this.titleInput,
