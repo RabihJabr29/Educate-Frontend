@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { CalendarOptions } from '@fullcalendar/angular'; // useful for typechecking
+import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular'; // useful for typechecking
+import { AssignmentsService } from '../assignments/assignments.service';
+import { Assignment } from '../models/assignment.model';
+
 
 @Component({
   selector: 'app-calendar',
@@ -12,19 +15,47 @@ export class CalendarComponent implements OnInit {
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     dateClick: this.handleDateClick.bind(this), // bind is important!
-    events: [
-      { title: 'event 1', date: '2020-06-27' },
-      { title: 'event 2', date: '2020-06-30' }
-    ]
+
   };
 
+  @ViewChild('calendar') calendar: FullCalendarComponent;
+
   handleDateClick(arg) {
-    alert('date click! ' + arg.dateStr)
+    // console.log("hello");
+    // alert('date click! ' + arg.dateStr)
   }
 
-  constructor() { }
+  constructor(private assignmentsService: AssignmentsService) { }
+  assignments: Assignment[] = [];
+  async ngOnInit() {
+    if (this.assignmentsService.allAssignments == null) {
+      this.assignments = await this.assignmentsService.getAllAssignments();
+    } else {
+      if (this.assignmentsService.allAssignments.length == 0) {
+        this.assignments = await this.assignmentsService.getAllAssignments();
+      } else {
+        this.assignments = this.assignmentsService.getAllAssignmentsCopy();
+      }
+    }
 
-  ngOnInit(): void {
+    try {
+      this.assignments.forEach(a => {
+        let startdate = a.startDate.split('/');
+        let startdateformatted = startdate[2] + '-' + startdate[1] + '-' + startdate[0];
+        let enddate = a.endDate.split('/');
+        let enddateformatted = enddate[2] + '-' + enddate[1] + '-' + enddate[0];
+        this.calendar.getApi().addEvent({ "title": a.name, "start": startdateformatted, "end": enddateformatted, 'backgroundColor': 'rgb(81, 159, 255)' })
+      });
+    } catch (err) { }
   }
 
+  ngAfterViewInit() {
+    this.assignments.forEach(a => {
+      let startdate = a.startDate.split('/');
+      let startdateformatted = startdate[2] + '-' + startdate[1] + '-' + startdate[0];
+      let enddate = a.endDate.split('/');
+      let enddateformatted = enddate[2] + '-' + enddate[1] + '-' + enddate[0];
+      this.calendar.getApi().addEvent({ "title": a.name, "start": startdateformatted, "end": enddateformatted, 'backgroundColor': 'rgb(81, 159, 255)' })
+    });
+  }
 }

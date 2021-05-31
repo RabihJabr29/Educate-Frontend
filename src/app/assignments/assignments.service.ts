@@ -14,6 +14,10 @@ export class AssignmentsService {
   allAssignments: Assignment[] = [];
   sections: Section[] = [];
 
+  getAllAssignmentsCopy() {
+    return [...this.allAssignments];
+  }
+
   async getAssignmentsbySectionIdFromServer(sectionId: string) {
     try {
 
