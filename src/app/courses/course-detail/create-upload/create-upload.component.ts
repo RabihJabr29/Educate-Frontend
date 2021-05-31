@@ -64,7 +64,8 @@ export class CreateUploadComponent implements OnInit {
       }
       let section_id = this.coursesService.currentSection;
       let currentPath = this.coursesService.currentPath;
-      console.log(this.fileToUpload);
+
+			if(this.fileToUpload.size > 0)
       this.coursesService.uploadFile(section_id, currentPath,this.fileToUpload);
     }
     this.close();

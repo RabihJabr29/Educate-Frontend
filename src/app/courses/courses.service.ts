@@ -98,10 +98,10 @@ export class CoursesService {
 
 
 
-  async getCourseContent(section_id: string, currentPath: string) {
+  getCourseContent(section_id: string, currentPath: string) {
     this.rootChildren = [];
-    await this.getHierarchyFromServer(section_id, currentPath);
-    return this.rootChildren;
+    this.getHierarchyFromServer(section_id, currentPath);
+    return [...this.rootChildren];
   }
 
   rootChildren: FileHierarchy[] = [];

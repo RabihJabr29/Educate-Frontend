@@ -4,7 +4,7 @@
   (mouseleave)="onMouseLeave()"
 >
   <span
-    *ngIf="editMode && userType != 'student'"
+    *ngIf="editMode && userType != 'student' && element.icon!='reply'"
     class="material-icons delete-icon"
     (click)="onClickDeleteContent()"
     >cancel</span

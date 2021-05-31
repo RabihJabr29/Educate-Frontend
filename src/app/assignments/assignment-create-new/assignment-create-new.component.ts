@@ -55,10 +55,13 @@ export class AssignmentCreateNewComponent implements OnInit {
       this.allowMultipleSubmissions = editAssigenment.allowMultipleSubmissions;
     }
 
+		if(!this.modalService.hasOpenModals()){
     return new Promise<boolean>(resolve => {
       this.modalRef = this.modalService.open(this.modalContent, { size: 'lg', backdrop: 'static' })
       this.modalRef.result.then(resolve, resolve)
     })
+	}
+		return new Promise<boolean>(resolve => false);
   }
 
   async close(): Promise<void> {
@@ -217,6 +220,8 @@ export class AssignmentCreateNewComponent implements OnInit {
       }
       let formData = new FormData();
       for (let prop in assignment) {
+				if(!assignment[prop])
+						return;
         formData.append(prop, assignment[prop]);
       }
       this.filesToUpload.forEach(file => {
@@ -227,6 +232,8 @@ export class AssignmentCreateNewComponent implements OnInit {
     }
     let formData = new FormData();
     for (let prop in assignment) {
+			if(!assignment[prop])
+				return;
       formData.append(prop, assignment[prop]);
     }
     this.filesToUpload.forEach(file => {
