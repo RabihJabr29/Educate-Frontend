@@ -35,10 +35,23 @@ export class AssignmentCreateNewComponent implements OnInit {
   currentAssignmentId: string;
 
   open(): Promise<boolean> {
+    this.typeInput = null;
+    this.titleInput = null;
+    this.descriptionInput = null;
+    this.startDateInput = null;
+    this.startTimeInput = null;
+    this.endDateInput = null;
+    this.endTimeInput = null;
+    this.maxGradeInput = null;
+    this.percentageInput = null;
+    this.allowLateSubmissions = false;
+    this.allowMultipleSubmissions = false;
+    this.filesToUpload = null;
     let editAssigenment: Assignment = this.assignmentsService.assignementEdit;
+    console.log(editAssigenment);
     if (editAssigenment) {
-
       this.createEditButtonLabel = "Save";
+      this.modalConfig.modalTitle = "Edit Assignment";
       this.currentAssignmentId = editAssigenment.assignment_id;
       this.typeInput = editAssigenment.type;
       this.percentageInput = editAssigenment.gradePercentage;
@@ -71,6 +84,9 @@ export class AssignmentCreateNewComponent implements OnInit {
   }
 
   async close(): Promise<void> {
+
+    this.assignmentsService.assignementEdit = null;
+
     if (this.modalConfig.shouldClose === undefined || (await this.modalConfig.shouldClose())) {
       const result = this.modalConfig.onClose === undefined || (await this.modalConfig.onClose())
       this.modalRef.close(result)
@@ -78,6 +94,8 @@ export class AssignmentCreateNewComponent implements OnInit {
   }
 
   async dismiss(): Promise<void> {
+    this.assignmentsService.assignementEdit = null;
+
     if (this.modalConfig.shouldDismiss === undefined || (await this.modalConfig.shouldDismiss())) {
       const result = this.modalConfig.onDismiss === undefined || (await this.modalConfig.onDismiss())
       this.modalRef.dismiss(result)
@@ -234,6 +252,8 @@ export class AssignmentCreateNewComponent implements OnInit {
       });
       this.assignmentsService.editAssignment(formData);
 
+      this.assignmentsService.assignementEdit = null;
+      this.close();
       this.typeInput = null;
       this.titleInput = null;
       this.descriptionInput = null;
@@ -246,8 +266,6 @@ export class AssignmentCreateNewComponent implements OnInit {
       this.allowLateSubmissions = false;
       this.allowMultipleSubmissions = false;
       this.filesToUpload = null;
-      this.close();
-
       return;
     }
     let formData = new FormData();
@@ -272,6 +290,8 @@ export class AssignmentCreateNewComponent implements OnInit {
     this.allowLateSubmissions = false;
     this.allowMultipleSubmissions = false;
     this.filesToUpload = null;
+    this.assignmentsService.assignementEdit = null;
+
     this.close();
   }
 

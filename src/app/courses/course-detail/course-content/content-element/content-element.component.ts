@@ -34,6 +34,7 @@ export class ContentElementComponent implements OnInit {
   }
 
   onClickDeleteContent() {
+    this.coursesService.deleteContentInProgress = true;
     if (this.userType == 'student')
       return;
     if (confirm("Are you sure you want to delete this item")) {

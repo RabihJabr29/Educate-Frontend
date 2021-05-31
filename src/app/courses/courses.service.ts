@@ -14,6 +14,7 @@ export class CoursesService {
   sections: Section[] = [];
   currentSection: string;
   currentSectionObject: Section;
+  deleteContentInProgress: boolean = false;
 
   async getCoursesFromServer() {
     try {
@@ -175,6 +176,10 @@ export class CoursesService {
   }
 
   async getFile(data_id: string) {
+    if (this.deleteContentInProgress) {
+      this.deleteContentInProgress = false;
+      return;
+    }
     try {
       let req = await fetch(`api/hierarchies/file/${data_id}`);
       if (req.status === 200) {

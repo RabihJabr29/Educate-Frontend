@@ -24,10 +24,10 @@ export class CourseContentComponent implements OnInit {
       await this.coursesService.getCourseContent(this.coursesService.currentSection, this.currentPath);
       this.displayedElements = this.coursesService.rootChildren;
 
-			            if (this.currentPath != 'root') {
-              let backElement: FileHierarchy = { path: "", name: "Back", type: "back", data: "", icon: "reply", mimetype: "", children: [] };
-              this.displayedElements.splice(0, 0, backElement);
-            }
+      if (this.currentPath != 'root') {
+        let backElement: FileHierarchy = { path: "", name: "Back", type: "back", data: "", icon: "reply", mimetype: "", children: [] };
+        this.displayedElements.splice(0, 0, backElement);
+      }
     })
     this.coursesService.currentPath = this.currentPath;
   }
