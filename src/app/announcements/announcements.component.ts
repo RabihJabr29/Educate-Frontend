@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
+import { Announcement } from '../models/announcement.model';
+import { AnnouncementsService } from './announcements.service';
 
 @Component({
   selector: 'app-announcements',
@@ -9,10 +11,12 @@ import { AuthService } from '../auth/auth.service';
 export class AnnouncementsComponent implements OnInit {
 
   userType: string;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private announcementsService: AnnouncementsService) { }
+   announcements: Announcement[] = [];
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.userType = this.authService.getUserType();
+    this.announcements = await this.announcementsService.getAllAnnouncements();
   }
 
 }

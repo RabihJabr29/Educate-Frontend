@@ -2,6 +2,8 @@ import { Component, Injectable, Input, OnInit, TemplateRef, ViewChild } from '@a
 import { Router } from '@angular/router';
 
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { isInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { CoursesService } from 'src/app/courses/courses.service';
 import { Assignment } from 'src/app/models/assignment.model';
 import { AssignmentsService } from '../assignments.service';
 import { ModalConfig } from './modal.config';
@@ -20,7 +22,7 @@ export class AssignmentCreateNewComponent implements OnInit {
   model;
 
 
-  constructor(private modalService: NgbModal, private assignmentsService: AssignmentsService, private router: Router) {
+  constructor(private modalService: NgbModal, private assignmentsService: AssignmentsService, private coursesService: CoursesService) {
   }
 
   today: string;
@@ -39,7 +41,7 @@ export class AssignmentCreateNewComponent implements OnInit {
     if (editAssigenment) {
 
       this.createEditButtonLabel = "Save";
-      this.currentAssignmentId = editAssigenment._id;
+      this.currentAssignmentId = editAssigenment.assignment_id;
       this.typeInput = editAssigenment.type;
       this.percentageInput = editAssigenment.gradePercentage;
       this.titleInput = editAssigenment.name;
@@ -110,73 +112,127 @@ export class AssignmentCreateNewComponent implements OnInit {
 
   async create() {
 
+
     if (this.typeInput == null) {
       this.typeValid = false;
+      return;
     } else this.typeValid = true;
     if (this.titleInput == null || this.titleInput.length < 4) {
       this.titleValid = false;
+      return;
     } else this.titleValid = true;
     if (this.descriptionInput == null || this.descriptionInput.length == 0) {
       this.descriptionValid = false;
+      return;
     } else this.descriptionValid = true;
     if (this.maxGradeInput == null || this.maxGradeInput <= 0) {
       this.maxGradeValid = false;
+      return;
     } else this.maxGradeValid = true;
     if (this.percentageInput == null) {
       this.percentageValid = false;
+      return;
     }
     if (this.startDateInput == null) {
       this.startDateValid = false;
+      return;
     } else this.startDateValid = true;
 
     if (this.startTimeInput == null) {
       this.startTimeValid = false;
+      return;
     } else this.startTimeValid = true;
 
     if (this.endDateInput == null) {
       this.endDateValid = false;
+      return;
     } else this.endDateValid = true;
 
     if (this.endTimeInput == null) {
       this.endTimeValid = false;
+      return;
     } else this.endTimeValid = true;
 
+    let startDate = this.startDateInput.split("-");
+    let endDate = this.endDateInput.split("-");
+    let startdateFormatted = startDate[2] + '/' + startDate[1] + '/' + startDate[0];
+    let enddateFormatted = endDate[2] + '/' + endDate[1] + '/' + endDate[0];
+
+    let startTime = this.startTimeInput.split(":");
+    if (parseInt(startTime[0]) >= 12) {
+      this.startTimeInput += " PM";
+    } else if (parseInt(startTime[0]) < 12) {
+      if (parseInt(startTime[0]) == 0) {
+        this.startTimeInput = "12:" + startTime[1];
+      }
+      this.startTimeInput += " AM";
+    }
+
+    let endTime = this.endTimeInput.split(":");
+    if (parseInt(endTime[0]) >= 12) {
+      this.endTimeInput += " PM";
+    } else if (parseInt(endTime[0]) < 12) {
+      if (parseInt(endTime[0]) == 0) {
+        this.endTimeInput = "12:" + endTime[1];
+      }
+      this.endTimeInput += " AM";
+    }
+
+    let section_id = this.coursesService.currentSection;
     let assignment: Assignment = {
       name: this.titleInput,
+      section: section_id,
       description: this.descriptionInput,
       type: this.typeInput,
       maxGrade: this.maxGradeInput,
       gradePercentage: this.percentageInput,
       isVisible: true,
       visibility: "automatic",
-      startDate: this.startDateInput,
+      startDate: startdateFormatted,
       startTime: this.startTimeInput,
-      endDate: this.endDateInput,
+      endDate: enddateFormatted,
       endTime: this.endTimeInput,
       allowLateSubmissions: this.allowLateSubmissions,
       allowMultipleSubmissions: this.allowMultipleSubmissions,
+      files: []
     }
     if (this.createEditButtonLabel == "Save") {
       assignment = {
-        _id: this.currentAssignmentId,
+        assignment_id: this.currentAssignmentId,
         name: this.titleInput,
+        section: section_id,
         description: this.descriptionInput,
         type: this.typeInput,
         maxGrade: this.maxGradeInput,
         gradePercentage: this.percentageInput,
         isVisible: true,
         visibility: "automatic",
-        startDate: this.startDateInput,
+        startDate: startdateFormatted,
         startTime: this.startTimeInput,
-        endDate: this.endDateInput,
+        endDate: enddateFormatted,
         endTime: this.endTimeInput,
         allowLateSubmissions: this.allowLateSubmissions,
         allowMultipleSubmissions: this.allowMultipleSubmissions,
+        files: []
       }
-      this.assignmentsService.editAssignment(assignment);
+      let formData = new FormData();
+      for (let prop in assignment) {
+        formData.append(prop, assignment[prop]);
+      }
+      this.filesToUpload.forEach(file => {
+        formData.append('files', file);
+      });
+      this.assignmentsService.editAssignment(formData);
       return;
     }
-    await this.assignmentsService.createAssignment(assignment);
+    let formData = new FormData();
+    for (let prop in assignment) {
+      formData.append(prop, assignment[prop]);
+    }
+    this.filesToUpload.forEach(file => {
+      formData.append('files', file);
+    });
+    await this.assignmentsService.createAssignment(formData);
     this.typeInput = null;
     this.titleInput = null;
     this.descriptionInput = null;
@@ -188,6 +244,17 @@ export class AssignmentCreateNewComponent implements OnInit {
     this.percentageInput = null;
     this.allowLateSubmissions = false;
     this.allowMultipleSubmissions = false;
+    this.filesToUpload = null;
     this.close();
+  }
+
+  filesToUpload: File[] = [];
+  filesUploadValid: boolean = true;
+
+  handleFileInput(files: FileList) {
+    let i;
+    for (i = 0; i < files.length; i++) {
+      this.filesToUpload.push(files.item(i));
+    }
   }
 }

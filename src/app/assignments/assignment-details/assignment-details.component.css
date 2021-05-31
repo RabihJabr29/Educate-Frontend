@@ -1,5 +1,5 @@
 .bg-course-primary {
-  background-color: rgb(255, 55, 105);
+  background-color: rgb(81, 159, 255);
 }
 
 .white {
@@ -35,7 +35,7 @@
 
 .list-file-style {
   font-size: smaller;
-  color: blue;
+  color: rgb(81, 159, 255);
 }
 
 .center-elements {
@@ -44,5 +44,11 @@
 }
 
 .bg-color {
-  background-color: rgb(255, 55, 105);
+  background-color: rgb(81, 159, 255);
+}
+
+.file-item {
+  cursor: pointer;
+  text-decoration: underline;
+  color: rgb(81, 159, 255);
 }

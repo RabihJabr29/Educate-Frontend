@@ -39,7 +39,7 @@ export class AssignmentDetailsComponent implements OnInit {
 
   async open(): Promise<boolean> {
     this.assignmentsService.selectedAssignment;
-    await this.studentsService.getStudentSubmissionByAssignmentID(this.authService.getUserId(), this.assignment._id);
+    await this.studentsService.getStudentSubmissionByAssignmentID(this.authService.getUserId(), this.assignment.assignment_id);
     this.assignmentSubmission = this.studentsService.assignmentSubmission;
     if (this.assignmentSubmission == undefined) {
       this.submissionGrade = "Pending";
@@ -69,19 +69,47 @@ export class AssignmentDetailsComponent implements OnInit {
     }
   }
 
-  files = [];
   submit() {
-    // submit assignment
     let data = {
       student_id: this.authService.getUserId(),
-      assignment_id: this.assignment._id,
-      textSubmission: this.textSubmissionInput
+      assignment_id: this.assignment.assignment_id,
+      textSubmission: this.textSubmissionInput,
+
     };
-    if (this.textSubmissionInput != null || this.files != null) {
-      this.studentsService.submitAssignment(data);
+
+    let formData = new FormData();
+    for (let prop in data) {
+      formData.append(prop, data[prop]);
+    }
+    this.filesToUpload.forEach(file => {
+      formData.append('files', file);
+    });
+    if (this.textSubmissionInput != null) {
+      this.studentsService.submitAssignment(formData);
+      this.close();
+    }
+
+  }
+
+  filesToUpload: File[] = [];
+  filesUploadValid: boolean = true;
+
+  handleFileInput(files: FileList) {
+    let i;
+    for (i = 0; i < files.length; i++) {
+      this.filesToUpload.push(files.item(i));
     }
   }
 
-
+  onClickAttachedFile(file) {
+    let blob = new Blob([new Uint8Array(file.data.data)], {
+      type: file.type
+    });
+    let link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = file.name;
+    link.click();
+    link.remove();
+  }
 
 }

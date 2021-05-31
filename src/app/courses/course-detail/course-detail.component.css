@@ -1,5 +1,5 @@
 .bg-course-primary {
-  background-color: rgb(255, 55, 105);
+  background-color: rgb(81, 159, 255);
 }
 
 .white {
@@ -34,13 +34,13 @@
 }
 
 .nav-title:hover {
-  color: rgb(255, 55, 105);
+  color: rgb(81, 159, 255);
 }
 
 .active-nav-item {
-  color: rgb(255, 55, 105);
+  color: rgb(81, 159, 255);
   border-bottom-style: solid;
-  border-bottom-color: rgb(255, 55, 105);
+  border-bottom-color: rgb(81, 159, 255);
 }
 
 .hover {
@@ -64,6 +64,19 @@
 
 .color-red {
   color: white;
-  background-color: rgb(255, 55, 105);
-  border-color: rgb(255, 55, 105);
+  background-color: rgb(81, 159, 255);
+  border-color: rgb(81, 159, 255);
+}
+
+.edit-mode-button {
+  color: rgb(81, 159, 255);
+  border-color: white;
+}
+.edit-mode-button:active,
+.edit-mode-button:focus {
+  outline: none;
+}
+
+.dropdown-toggle::after {
+  display: none;
 }

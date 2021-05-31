@@ -70,7 +70,7 @@ export class StudentsService {
               textSubmission: submission.textSubmission,
               comments: submission.comments,
               date: submission.date,
-              // files to be added
+              files: submission.files
             }
             this.studentSubmissions.push(newSubmission);
           }
@@ -133,7 +133,7 @@ export class StudentsService {
           textSubmission: submission.textSubmission,
           comments: submission.comments,
           date: submission.date,
-          // files to be added
+          files: submission.files
         }
         this.assignmentSubmission = newSubmission;
       } else {
@@ -152,19 +152,15 @@ export class StudentsService {
     return this.assignmentSubmission;
   }
 
-  async submitAssignment(data) {
+  async submitAssignment(data: FormData) {
     try {
       let res = await fetch("api/submissions/submit", {
-        method: 'POST', body: JSON.stringify(data),
+        method: 'POST', body: data,
         mode: 'cors',
         credentials: 'include',
-        headers: {
-          'Accept': 'application/json',
-          'Content-type': 'application/json'
-        },
       });
       if (res.status == 201) {
-        console.log(res);
+        console.log(await res.json());
       } else {
         console.log(res.text());
       }
@@ -172,4 +168,5 @@ export class StudentsService {
       console.log(err);
     }
   }
+
 }

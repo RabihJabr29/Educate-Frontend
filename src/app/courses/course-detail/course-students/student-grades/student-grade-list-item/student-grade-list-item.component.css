@@ -8,6 +8,10 @@
   color: gray;
 }
 
+.list-item-text-smaller {
+  font-size: 12px;
+  color: gray;
+}
 .Graded {
   color: rgb(20, 179, 41);
 }

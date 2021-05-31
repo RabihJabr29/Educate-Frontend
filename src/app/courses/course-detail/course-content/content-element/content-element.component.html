@@ -1,4 +1,14 @@
-<div class="div cursor-pointer text-center click-effect">
+<div
+  class="div cursor-pointer text-center click-effect"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+>
+  <span
+    *ngIf="editMode && userType != 'student'"
+    class="material-icons delete-icon"
+    (click)="onClickDeleteContent()"
+    >cancel</span
+  >
   <span class="material-icons content-icon mb-0 pb-0">{{ element.icon }}</span>
-  <h6 class="mt-0">{{ element.title }}</h6>
+  <h6 class="mt-0">{{ element.name }}</h6>
 </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FileHierarchy } from 'src/app/models/file-hierarchy.model';
+import { CoursesService } from '../../courses.service';
 
 @Component({
   selector: 'app-course-content',
@@ -7,46 +9,59 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseContentComponent implements OnInit {
 
-  contentElements = [{ title: "Chapters", icon: "folder", children: [{ title: "HTML & CSS", icon: "folder", children: [{ title: "HTML & CSS Tutorial", icon: "picture_as_pdf", children: [] }] }, { title: "List of Topics", icon: "picture_as_pdf", children: [] }] }, { title: "Syllabus", icon: "picture_as_pdf", children: [] }];
+  //contentElements = [{ title: "Chapters", icon: "folder", children: [{ title: "HTML & CSS", icon: "folder", children: [{ title: "HTML & CSS Tutorial", icon: "picture_as_pdf", children: [] }] }, { title: "List of Topics", icon: "picture_as_pdf", children: [] }] }, { title: "Syllabus", icon: "picture_as_pdf", children: [] }];
 
-  displayedElements;
+  displayedElements: FileHierarchy[] = [];
+  currentPath: string = "root";
 
-  constructor() {
+  constructor(private coursesService: CoursesService) {
   }
 
-  ngOnInit(): void {
-    this.displayedElements = this.contentElements;
+  async ngOnInit() {
+    await this.coursesService.getCourseContent(this.coursesService.currentSection, this.currentPath);
+    this.displayedElements = this.coursesService.rootChildren;
+    this.coursesService.contentDeletedEventEmitter.subscribe(async flag => {
+      await this.coursesService.getCourseContent(this.coursesService.currentSection, this.currentPath);
+      this.displayedElements = this.coursesService.rootChildren;
+    })
+    this.coursesService.currentPath = this.currentPath;
   }
 
   clickCount: number = 0;
   inProgress: Boolean = false;
-  previousElements: { title: string, icon: string, children: [] }[] = [];
+  previousElements: string[] = [];
 
-  onClickElement(element) {
+  async onClickElement(element) {
     this.clickCount += 1;
     if (!this.inProgress) {
       this.inProgress = true;
-      setTimeout(() => {
+      setTimeout(async () => {
         if (this.clickCount == 1) {
           if (element.icon == "reply") {
-            this.displayedElements.splice(0, 1);
-            console.log(this.previousElements[this.previousElements.length - 1])
-            console.log(typeof (this.previousElements[0]));
-            this.displayedElements = this.previousElements[this.previousElements.length - 1];
-            this.previousElements.pop();
+            this.currentPath = this.previousElements.pop();
+            this.coursesService.currentPath = this.currentPath;
+            await this.coursesService.getCourseContent(this.coursesService.currentSection, this.currentPath);
+            this.displayedElements = this.coursesService.rootChildren;
+            if (this.currentPath != 'root') {
+              let backElement: FileHierarchy = { path: "", name: "Back", type: "back", data: "", icon: "reply", mimetype: "", children: [] };
+              this.displayedElements.splice(0, 0, backElement);
+            }
           } else {
             // download file if it is not a folder.
-            if (element.icon != "folder") {
+            if (element.type == "file") {
+              this.coursesService.getFile(element.data);
               // we need to add a 'children' attribute to each of our elements, only populate it if it is
               // a folder.this way we can always see inside the folder and go back.
             }
           }
         } else if (this.clickCount == 2) {
-          console.log("double")
-          if (element.icon == 'folder') {
-            let backElement = { title: "Back", icon: "reply", type: "backButton" };
-            this.previousElements.push(this.displayedElements);
-            this.displayedElements = element.children;
+          if (element.type == 'folder') {
+            let backElement: FileHierarchy = { path: "", name: "Back", type: "back", data: "", icon: "reply", mimetype: "", children: [] };
+            this.previousElements.push(this.currentPath);
+            this.currentPath = element.path;
+            this.coursesService.currentPath = this.currentPath;
+            await this.coursesService.getCourseContent(this.coursesService.currentSection, this.currentPath);
+            this.displayedElements = this.coursesService.rootChildren;
             this.displayedElements.splice(0, 0, backElement);
           }
         }

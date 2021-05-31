@@ -73,6 +73,7 @@
                 activeNavItem == 'announcements') &&
               userType == 'instructor'
             "
+            ngbDropdown
           >
             <button
               class="
@@ -82,14 +83,28 @@
                 p-0
                 mt-3
                 me-4
-                mb-1
+                mb-3
                 center-elements
                 color-red
               "
               type="button"
               (click)="onClickAdd()"
+              id="dropdownBasic1"
+              ngbDropdownToggle
             >
               <span class="material-icons larger">add</span>
+              <div
+                ngbDropdownMenu
+                aria-labelledby="dropdownBasic1"
+                *ngIf="activeNavItem == 'course-content'"
+              >
+                <button ngbDropdownItem (click)="onClickCreateFolder()">
+                  Create Folder
+                </button>
+                <button ngbDropdownItem (click)="onClickUploadFile()">
+                  Upload File
+                </button>
+              </div>
             </button>
           </div>
         </div>
@@ -103,3 +118,13 @@
 
 <app-assignment-create-new #modal [modalConfig]="modalConfig">
 </app-assignment-create-new>
+
+<app-create-upload
+  #createUploadModal
+  [modalConfig]="createUploadModalConfig"
+></app-create-upload>
+
+<app-announcement-create-new
+  #createAnnouncementModal
+  [modalConfig]="createAnnouncementModalConfig"
+></app-announcement-create-new>

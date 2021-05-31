@@ -10,5 +10,5 @@ export interface Submission {
   textSubmission?: string;
   comments?: string;
   date: string;
-  // files: File[]
+  files: File[]
 }

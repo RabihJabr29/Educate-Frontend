@@ -38,6 +38,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { CourseAnnouncementsComponent } from './courses/course-detail/course-announcements/course-announcements.component';
 import { AnnouncementCreateNewComponent } from './announcements/announcement-create-new/announcement-create-new.component';
 import { AssignmentDetailsComponent } from './assignments/assignment-details/assignment-details.component';
+import { CreateUploadComponent } from './courses/course-detail/create-upload/create-upload.component';
 
 // import { AuthInterceptor } from './auth/auth-interceptor';
 
@@ -107,7 +108,8 @@ const routes: Routes = [
     StudentSubmissionComponent,
     CourseAnnouncementsComponent,
     AnnouncementCreateNewComponent,
-    AssignmentDetailsComponent
+    AssignmentDetailsComponent,
+    CreateUploadComponent
   ],
   imports: [
     BrowserModule,

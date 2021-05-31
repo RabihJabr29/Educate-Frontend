@@ -24,8 +24,8 @@
 .left-coloring {
   background: linear-gradient(
     to right,
-    red 0.5rem,
-    rgb(241, 241, 241) 0.5rem,
+    rgb(81, 159, 255) 5px,
+    rgb(241, 241, 241) 5px,
     rgb(241, 241, 241) 100%
   );
 }
@@ -42,6 +42,10 @@
   color: rgb(255, 59, 59);
 }
 
-overflow-scroll {
+.overflow-scroll {
   overflow: scroll;
+}
+
+.manual-border-radius {
+  border-radius: 8px;
 }

@@ -15,12 +15,11 @@
       "
       style="height: 500px"
     >
-      <app-announcement-list-item></app-announcement-list-item>
-      <app-announcement-list-item></app-announcement-list-item>
-      <app-announcement-list-item></app-announcement-list-item>
-      <app-announcement-list-item></app-announcement-list-item>
-      <app-announcement-list-item></app-announcement-list-item>
-      <app-announcement-list-item></app-announcement-list-item>
+      <app-announcement-list-item
+        *ngFor="let announcement of announcements"
+        [announcement]="announcement"
+      ></app-announcement-list-item>
+      <h6 *ngIf="announcements.length == 0">No announcements posted yet.</h6>
     </div>
   </div>
 </div>

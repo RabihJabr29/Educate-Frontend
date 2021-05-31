@@ -1,13 +1,25 @@
-<div class="container background-color-gray rounded-3" style="height: 300px">
-  <div class="row pt-3 ps-0 pe-0">
-    <div
-      class="col-lg-2 col-sm-3 col-6 p-0 m-0"
-      *ngFor="let element of displayedElements"
-    >
-      <app-content-element
-        (click)="onClickElement(element)"
-        [element]="element"
-      ></app-content-element>
+<div
+  class="container background-color-gray rounded-3 ps-3 pe-3"
+  style="height: 300px"
+>
+  <div
+    class="
+      row
+      scrolling-wrapper-vertical
+      flex-column flex-nowrap
+      hide-scrollbar
+    "
+  >
+    <div class="row pt-3 ps-0 pe-0">
+      <div
+        class="col-lg-2 col-sm-3 col-6 p-0 m-0"
+        *ngFor="let element of displayedElements"
+      >
+        <app-content-element
+          (click)="onClickElement(element)"
+          [element]="element"
+        ></app-content-element>
+      </div>
     </div>
   </div>
 </div>

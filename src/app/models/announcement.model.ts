@@ -1,6 +1,8 @@
+import { Section } from "./section.model";
+
 export interface Announcement {
-  id: string;
-  courseName: string;
+  section: Section;
   title: string;
   description: string;
+  date: string
 }

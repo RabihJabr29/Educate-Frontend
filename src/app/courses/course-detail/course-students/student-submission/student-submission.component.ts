@@ -86,5 +86,17 @@ export class StudentSubmissionComponent implements OnInit {
     this.close();
   }
 
+
+  onClickAttachedFile(file) {
+    let blob = new Blob([new Uint8Array(file.data.data)], {
+      type: file.type
+    });
+    let link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = file.name;
+    link.click();
+    link.remove();
+  }
+
 }
 

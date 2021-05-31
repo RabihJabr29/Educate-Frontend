@@ -1,4 +1,4 @@
-<ng-template #createAnnouncementModal>
+<ng-template #createUploadModal>
   <div class="modal-header">
     <div class="row">
       <div class="col">
@@ -8,45 +8,39 @@
   </div>
   <div class="modal-body p-3 m-3">
     <form action="">
-      <div class="form-group">
-        <label for="folderName">Announcement Title:</label>
+      <div class="form-group" *ngIf="modalConfig.createButtonLabel == 'Create'">
+        <label for="folderName">Folder Name:</label>
         <input
           type="text"
-          name="announcementTitle"
-          id="announcementTitle"
+          name="folderName"
+          id="folderName"
           ngModel
           placeholder="Title"
           minlength="8"
           required
           class="form-control"
-          [(ngModel)]="announcementTitle"
+          [(ngModel)]="folderName"
         />
-        <span
-          class="text-danger span-error-message"
-          *ngIf="!announcementTitleValid"
-        >
-          Please enter a title.</span
+        <span class="text-danger span-error-message" *ngIf="!folderNameValid">
+          Please enter a folder name.</span
         >
       </div>
-      <div class="form-text align-items-center justify-content-center mt-4">
-        <label
-          class="form-text card-course-text-small text-bold"
-          for="announcementDescription"
-          >Announement Description:</label
-        >
-        <textarea
-          class="form-text form-control"
-          id="announcementDescription"
-          name="announcementDescription"
-          rows="3"
-          ngModel
-          [(ngModel)]="announcementDescription"
-        ></textarea>
-        <span
-          class="text-danger span-error-message"
-          *ngIf="!announcementDescriptionValid"
-        >
-          Please enter a description.</span
+      <div
+        class="form-group row"
+        *ngIf="modalConfig.createButtonLabel == 'Upload'"
+      >
+        <div class="col">
+          <label for="formFileMultiple" class="form-label">Add File(s):</label>
+          <input
+            class="form-control"
+            type="file"
+            id="formFileMultiple"
+            name="formFileMultiple"
+            (change)="handleFileInput($event.target.files)"
+          />
+        </div>
+        <span class="text-danger span-error-message" *ngIf="!fileUploadValid">
+          Please choose a file to upload.</span
         >
       </div>
     </form>
@@ -71,7 +65,7 @@
     <button
       type="button"
       class="btn btn-outline-primary"
-      (click)="create()"
+      (click)="createOrUpload()"
       *ngIf="
         modalConfig.hideCreateButton === undefined ||
         !modalConfig.hideCreateButton()
@@ -81,7 +75,7 @@
         modalConfig.disableCreateButton()
       "
     >
-      Create
+      {{ modalConfig.createButtonLabel }}
     </button>
   </div>
 </ng-template>

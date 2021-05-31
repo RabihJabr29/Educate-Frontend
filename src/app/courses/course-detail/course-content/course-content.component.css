@@ -26,4 +26,7 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  padding: 0;
+  margin-right: 0;
+  max-width: 100%;
 }

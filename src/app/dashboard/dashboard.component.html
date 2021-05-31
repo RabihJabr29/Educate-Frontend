@@ -43,11 +43,11 @@
             row
             scrolling-wrapper-vertical
             flex-column flex-nowrap
+            hide-scrollbar
             pb-4
             ps-4
             pe-4
             pt-2
-            hide-scrollbar
           "
           style="height: 300px"
         >
@@ -73,9 +73,13 @@
           "
           style="max-height: 600px"
         >
-          <app-announcement-list-item></app-announcement-list-item>
-          <app-announcement-list-item></app-announcement-list-item>
-          <app-announcement-list-item></app-announcement-list-item>
+          <app-announcement-list-item
+            *ngFor="let announcement of announcements"
+            [announcement]="announcement"
+          ></app-announcement-list-item>
+          <h6 *ngIf="announcements.length == 0">
+            No announcements posted yet.
+          </h6>
         </div>
       </div>
     </div>

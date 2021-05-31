@@ -37,7 +37,7 @@ export class AssignmentListItemComponent implements OnInit {
 
   onClickDeleteAssignment() {
     if (confirm("Are you sure you want to delete this item")) {
-      this.assignmentsService.deleteAssignment(this.assignment._id);
+      this.assignmentsService.deleteAssignment(this.assignment.assignment_id);
     }
   }
 

@@ -1,6 +1,8 @@
+
 export interface Assignment {
-  _id?: string;
+  assignment_id?: string;
   name: string;
+  section: string;
   description: string;
   type: string;
   maxGrade: number;
@@ -14,6 +16,5 @@ export interface Assignment {
   allowMultipleSubmissions: boolean;
   allowLateSubmissions: boolean;
   isVisible: boolean;
-  // file: File[]
-
+  files: File[];
 }

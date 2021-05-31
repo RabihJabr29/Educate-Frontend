@@ -1,6 +1,7 @@
 .content-icon {
   font-size: 40px;
-  color: rgb(255, 55, 105);
+  color: rgb(81, 159, 255);
+  /* rgb(81,159,255) */
 }
 
 .cursor-pointer {
@@ -11,4 +12,11 @@
   overflow-x: unset;
   box-shadow: 1 1px #666;
   transform: translateY(4px);
+}
+
+.delete-icon {
+  position: absolute;
+  right: 30%;
+  font-size: 24px;
+  color: #666;
 }

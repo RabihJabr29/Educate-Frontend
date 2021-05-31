@@ -22,9 +22,10 @@ export class AssignmentsService {
         let assignments = await res.json();
         assignments.forEach(assignment => {
           let newAssignment: Assignment = {
-            _id: assignment._id,
+            assignment_id: assignment._id,
             type: assignment.type,
             name: assignment.name,
+            section: assignment.section,
             description: assignment.description,
             startDate: assignment.startDate,
             startTime: assignment.startTime,
@@ -37,7 +38,7 @@ export class AssignmentsService {
             isVisible: assignment.isVisible, // ids
             allowMultipleSubmissions: assignment.allowMultipleSubmissions, // ids
             allowLateSubmissions: assignment.allowLateSubmissions,
-            // files: assignment.files, // ids
+            files: assignment.files, // no ids
           }
           this.assignments.push(newAssignment);
         });
@@ -68,8 +69,9 @@ export class AssignmentsService {
           let assignments = await res.json();
           assignments.forEach(assignment => {
             let newAssignment: Assignment = {
-              _id: assignment._id,
+              assignment_id: assignment._id,
               type: assignment.type,
+              section: assignment.section,
               name: assignment.name,
               description: assignment.description,
               startDate: assignment.startDate,
@@ -83,7 +85,7 @@ export class AssignmentsService {
               isVisible: assignment.isVisible, // ids
               allowMultipleSubmissions: assignment.allowMultipleSubmissions, // ids
               allowLateSubmissions: assignment.allowLateSubmissions,
-              // files: assignment.files, // ids
+              files: assignment.files, // not the ids
             }
             this.allAssignments.push(newAssignment);
           });
@@ -104,35 +106,14 @@ export class AssignmentsService {
     return [...this.allAssignments];
   }
 
-  async createAssignment(assignmnet: Assignment) {
+  async createAssignment(assignmnet: FormData) {
     // create assingmnet
     try {
-      let sectionId: string = this.coursesService.currentSection;
-      let newAssignment = {
-        section: sectionId,
-        name: assignmnet.name,
-        description: assignmnet.description,
-        type: assignmnet.type,
-        maxGrade: assignmnet.maxGrade,
-        gradePercentage: assignmnet.gradePercentage,
-        startDate: assignmnet.startDate,
-        startTime: assignmnet.startTime,
-        endDate: assignmnet.endDate,
-        endTime: assignmnet.endTime,
-        isActive: true,
-        visibility: assignmnet.visibility,
-        allowLateSubmissions: assignmnet.allowLateSubmissions,
-        allowMultipleSubmissions: assignmnet.allowMultipleSubmissions,
-        files: []
-      }
       let res = await fetch("api/assignments/", {
-        method: 'POST', body: JSON.stringify(newAssignment),
+        method: 'POST', body: assignmnet,
         mode: 'cors',
         credentials: 'include',
-        headers: {
-          'Accept': 'application/json',
-          'Content-type': 'application/json'
-        },
+
       });
       if (res.status == 201) {
         let body = await res.json();
@@ -147,37 +128,13 @@ export class AssignmentsService {
     this.assignmentsChanged.emit(true);
   }
 
-  async editAssignment(assignmnet: Assignment) {
+  async editAssignment(assignmnet: FormData) {
     // create assingmnet
     try {
-      console.log(assignmnet._id);
-      let sectionId: string = this.coursesService.currentSection;
-      let newAssignment = {
-        assignment_id: assignmnet._id,
-        section: sectionId,
-        name: assignmnet.name,
-        description: assignmnet.description,
-        type: assignmnet.type,
-        maxGrade: assignmnet.maxGrade,
-        gradePercentage: assignmnet.gradePercentage,
-        startDate: assignmnet.startDate,
-        startTime: assignmnet.startTime,
-        endDate: assignmnet.endDate,
-        endTime: assignmnet.endTime,
-        isActive: true,
-        visibility: assignmnet.visibility,
-        allowLateSubmissions: assignmnet.allowLateSubmissions,
-        allowMultipleSubmissions: assignmnet.allowMultipleSubmissions,
-        files: []
-      }
       let res = await fetch("api/assignments/", {
-        method: 'PUT', body: JSON.stringify(newAssignment),
+        method: 'PUT', body: assignmnet,
         mode: 'cors',
         credentials: 'include',
-        headers: {
-          'Accept': 'application/json',
-          'Content-type': 'application/json'
-        },
       });
       if (res.status == 201) {
         let body = await res.json();

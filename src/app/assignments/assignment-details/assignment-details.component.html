@@ -19,9 +19,9 @@
       <div class="col">
         <p class="card-course-text-small text-bold">Files attached:</p>
         <ul class="list-file-style">
-          <li><a href="#">RabihJabr_Assignment1.pdf</a></li>
-          <li><a href="#">RabihJabr_Assignment2.pdf</a></li>
-          <li><a href="#">RabihJabr_Assignment3.pdf</a></li>
+          <li *ngFor="let item of assignment.files" >
+            <span class="file-item" (click)="onClickAttachedFile(item)">{{ item.name }}</span>
+          </li>
         </ul>
       </div>
     </div>
@@ -71,6 +71,7 @@
             id="formFileMultiple"
             name="formFileMultiple"
             multiple
+            (change)="handleFileInput($event.target.files)"
           />
         </div>
       </div>
