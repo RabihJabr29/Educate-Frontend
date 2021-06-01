@@ -21,6 +21,7 @@ export class CourseAssignmentsComponent implements OnInit {
     this.assignemntsService.assignmentsChanged.subscribe(async flag => {
       if (flag) {
         let sectionId: string = this.coursesService.currentSection;
+        this.assignments = [];
         this.assignments = await this.assignemntsService.getAssignmentsBySectionId(sectionId);
       }
     });

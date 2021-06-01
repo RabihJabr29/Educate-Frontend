@@ -99,9 +99,9 @@ export class CoursesService {
 
 
 
-  getCourseContent(section_id: string, currentPath: string) {
+  async getCourseContent(section_id: string, currentPath: string) {
     this.rootChildren = [];
-    this.getHierarchyFromServer(section_id, currentPath);
+    await this.getHierarchyFromServer(section_id, currentPath);
     return [...this.rootChildren];
   }
 
@@ -114,7 +114,7 @@ export class CoursesService {
         method: 'GET',
         mode: 'cors'
       });
-
+      this.rootChildren = [];
       if (req.status === 200) {
         let res = await req.json();
         res.children.forEach(child => {
@@ -132,7 +132,6 @@ export class CoursesService {
             newChild.icon = "folder";
           this.rootChildren.push(newChild);
         });
-
       } else {
         console.log(await req.text());
       }
@@ -275,7 +274,6 @@ export class CoursesService {
 
       formData.append('files', file);
 
-      console.log(formData);
 
       let req = await
         fetch('api/hierarchies/upload', {

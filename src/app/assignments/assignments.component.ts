@@ -17,6 +17,7 @@ export class AssignmentsComponent implements OnInit {
     this.assignments = await this.assignmentsService.getAllAssignments();
     this.assignmentsService.assignmentsChanged.subscribe(async flag => {
       if (flag) {
+        this.assignments = [];
         this.assignments = await this.assignmentsService.getAllAssignments();
       }
     });

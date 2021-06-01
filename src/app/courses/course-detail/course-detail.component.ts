@@ -29,7 +29,8 @@ export class CourseDetailComponent implements OnInit {
 
   async ngOnInit() {
     this.currentSectionId = localStorage.getItem("currentSection");
-    this.activeNavItem = localStorage.getItem("activeNavItem");
+    if (localStorage.getItem("activeNavItem"))
+      this.activeNavItem = localStorage.getItem("activeNavItem");
     this.coursesService.currentSection = this.currentSectionId;
     await this.coursesService.getCourseByIdFromServer(this.currentSectionId);
     this.currentSection = this.coursesService.currentSectionObject;
@@ -41,13 +42,16 @@ export class CourseDetailComponent implements OnInit {
       description: section_course.description,
       credits: section_course.credits,
       department: section_course.department,
-    }
+    };
     this.userType = this.authService.getUserType();
     this.assignmentsService.editEventEmitter.subscribe((assignement: Assignment) => {
       this.openModal();
     });
   }
 
+  ngOnDestroy(): void {
+    localStorage.removeItem("activeNavItem");
+  }
   onClickNavItemCourseContent() {
     this.activeNavItem = "course-content";
     localStorage.setItem('activeNavItem', this.activeNavItem);

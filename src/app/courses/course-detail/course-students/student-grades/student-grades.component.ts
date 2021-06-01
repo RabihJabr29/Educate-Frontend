@@ -30,7 +30,7 @@ export class StudentGradesComponent implements OnInit {
   constructor(private modalService: NgbModal, private studentsService: StudentsService, private coursesService: CoursesService) { }
 
   async ngOnInit() {
-
+    
   }
 
 

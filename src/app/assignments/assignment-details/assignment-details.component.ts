@@ -20,7 +20,6 @@ export class AssignmentDetailsComponent implements OnInit {
   @Input() public modalConfig: AssignmentDetailsModalConfig;
   @ViewChild('assignmentDetailsModal') private modalContent: TemplateRef<AssignmentDetailsComponent>;
   private modalRef: NgbModalRef;
-
   model;
 
   textSubmissionInput: string;
@@ -31,7 +30,7 @@ export class AssignmentDetailsComponent implements OnInit {
   constructor(private modalService: NgbModal, private studentsService: StudentsService, private authService: AuthService, private assignmentsService: AssignmentsService) { }
 
   async ngOnInit() {
-
+    
   }
 
   submissionGrade: string | number;
@@ -45,10 +44,12 @@ export class AssignmentDetailsComponent implements OnInit {
       this.submissionGrade = "Pending";
     } else {
       this.submissionGrade = this.assignmentSubmission.grade;
-      if (this.assignmentSubmission && !this.assignment.allowMultipleSubmissions) {
-        this.submitDisabled = true;
-      } else this.submitDisabled = false;
+      console.log(this.submissionGrade);
+      // if (this.assignmentSubmission && !this.assignment.allowMultipleSubmissions) {
+      //   this.submitDisabled = true;
+      // } else this.submitDisabled = false;
     }
+
     return new Promise<boolean>(resolve => {
       this.modalRef = this.modalService.open(this.modalContent, { size: 'lg', backdrop: 'static' })
       this.modalRef.result.then(resolve, resolve)

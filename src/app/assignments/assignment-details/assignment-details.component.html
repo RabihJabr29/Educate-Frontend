@@ -14,13 +14,17 @@
         <p class="card-course-text-small">
           <b>Active:</b> {{ assignment.isActive }}
         </p>
-        <p class="card-course-text-small"><b>My Grade:</b> Pending</p>
+        <p class="card-course-text-small">
+          <b>My Grade:</b> {{ submissionGrade }}
+        </p>
       </div>
       <div class="col">
         <p class="card-course-text-small text-bold">Files attached:</p>
         <ul class="list-file-style">
-          <li *ngFor="let item of assignment.files" >
-            <span class="file-item" (click)="onClickAttachedFile(item)">{{ item.name }}</span>
+          <li *ngFor="let item of assignment.files">
+            <span class="file-item" (click)="onClickAttachedFile(item)">{{
+              item.name
+            }}</span>
           </li>
         </ul>
       </div>

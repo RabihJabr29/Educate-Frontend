@@ -1,8 +1,6 @@
 import { Component, Injectable, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { isInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { CoursesService } from 'src/app/courses/courses.service';
 import { Assignment } from 'src/app/models/assignment.model';
 import { AssignmentsService } from '../assignments.service';
@@ -20,7 +18,6 @@ export class AssignmentCreateNewComponent implements OnInit {
   private modalRef: NgbModalRef;
   createEditButtonLabel: string = "Create";
   model;
-
 
   constructor(private modalService: NgbModal, private assignmentsService: AssignmentsService, private coursesService: CoursesService) {
   }
@@ -177,8 +174,7 @@ export class AssignmentCreateNewComponent implements OnInit {
       this.endTimeValid = false;
       return;
     } else this.endTimeValid = true;
-
-
+    console.log("object");
     let startDate = this.startDateInput.split("-");
     let endDate = this.endDateInput.split("-");
     let startdateFormatted = startDate[2] + '/' + startDate[1] + '/' + startDate[0];
@@ -223,6 +219,7 @@ export class AssignmentCreateNewComponent implements OnInit {
       files: []
     }
     if (this.createEditButtonLabel == "Save") {
+      console.log("Save");
       assignment = {
         assignment_id: this.currentAssignmentId,
         name: this.titleInput,
@@ -243,7 +240,7 @@ export class AssignmentCreateNewComponent implements OnInit {
       }
       let formData = new FormData();
       for (let prop in assignment) {
-        if (assignment[prop])
+        if (prop != 'files')
           formData.append(prop, assignment[prop]);
       }
 
@@ -270,14 +267,21 @@ export class AssignmentCreateNewComponent implements OnInit {
     }
     let formData = new FormData();
     for (let prop in assignment) {
-      if (!assignment[prop])
-        return;
-      formData.append(prop, assignment[prop]);
+      if (prop != 'files') {
+        formData.append(prop, assignment[prop]);
+      }
     }
+
     this.filesToUpload.forEach(file => {
       formData.append('files', file);
     });
-    await this.assignmentsService.createAssignment(formData);
+    console.log(formData.getAll('files'));
+    try {
+      await this.assignmentsService.createAssignment(formData);
+      this.close();
+    } catch (err) {
+      console.log(err);
+    }
     this.typeInput = null;
     this.titleInput = null;
     this.descriptionInput = null;
@@ -292,7 +296,6 @@ export class AssignmentCreateNewComponent implements OnInit {
     this.filesToUpload = null;
     this.assignmentsService.assignementEdit = null;
 
-    this.close();
   }
 
   filesToUpload: File[] = [];
@@ -302,10 +305,10 @@ export class AssignmentCreateNewComponent implements OnInit {
     this.filesToUpload = [];
     let i;
     for (i = 0; i < files.length; i++) {
-      this.filesToUpload.push(files.item(i));
+      if (files.item(i).size > 0)
+        this.filesToUpload.push(files.item(i));
     }
   }
-
 
   onClickAttachedFile(file) {
     let blob = new Blob([new Uint8Array(file.data.data)], {

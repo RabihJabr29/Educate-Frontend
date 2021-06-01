@@ -20,7 +20,7 @@ export class AssignmentsService {
 
   async getAssignmentsbySectionIdFromServer(sectionId: string) {
     try {
-
+      this.assignments = [];
       let res = await fetch("api/assignments/" + sectionId + "/all", { method: 'GET' });
       if (res.status == 200) {
         let assignments = await res.json();
@@ -112,12 +112,12 @@ export class AssignmentsService {
 
   async createAssignment(assignmnet: FormData) {
     // create assingmnet
+    console.log("service create");
     try {
       let res = await fetch("api/assignments/", {
         method: 'POST', body: assignmnet,
         mode: 'cors',
         credentials: 'include',
-
       });
       if (res.status == 201) {
         let body = await res.json();
