@@ -29,6 +29,8 @@ export class CreateUploadComponent implements OnInit {
   }
 
   async close(): Promise<void> {
+    this.folderName = null;
+    this.fileToUpload = null;
     if (this.modalConfig.shouldClose === undefined || (await this.modalConfig.shouldClose())) {
       const result = this.modalConfig.onClose === undefined || (await this.modalConfig.onClose())
       this.modalRef.close(result)
@@ -65,8 +67,8 @@ export class CreateUploadComponent implements OnInit {
       let section_id = this.coursesService.currentSection;
       let currentPath = this.coursesService.currentPath;
 
-			if(this.fileToUpload.size > 0)
-      this.coursesService.uploadFile(section_id, currentPath,this.fileToUpload);
+      if (this.fileToUpload.size > 0)
+        this.coursesService.uploadFile(section_id, currentPath, this.fileToUpload);
     }
     this.close();
   }

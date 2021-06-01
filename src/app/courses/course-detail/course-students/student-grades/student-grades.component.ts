@@ -30,7 +30,7 @@ export class StudentGradesComponent implements OnInit {
   constructor(private modalService: NgbModal, private studentsService: StudentsService, private coursesService: CoursesService) { }
 
   async ngOnInit() {
-    
+
   }
 
 
@@ -39,6 +39,12 @@ export class StudentGradesComponent implements OnInit {
     this.student = this.studentsService.currentStudent;
     this.studentSubmissions = [];
     this.studentSubmissions = await this.studentsService.getSubmissionsByStudentId(this.student._id, currentSectionId);
+    this.studentsService.studentSubmissionsEventEmitter
+      .subscribe(async flag => {
+        let currentSectionId = this.coursesService.currentSection;
+        this.studentSubmissions = [];
+        this.studentSubmissions = await this.studentsService.getSubmissionsByStudentId(this.student._id, currentSectionId);
+      })
     return new Promise<boolean>(resolve => {
       this.modalRef = this.modalService.open(this.modalContent, { size: 'lg', backdrop: 'static' })
       this.modalRef.result.then(resolve, resolve)

@@ -39,7 +39,6 @@ export class StudentSubmissionComponent implements OnInit {
     this.submissionStatus = this.submission.isGraded ? "Graded" : "Submitted";
     this.gradeInput = this.submission.grade;
     this.commentsInput = this.submission.comments;
-    console.log(this.submission)
     return new Promise<boolean>(resolve => {
       this.modalRef = this.modalService.open(this.modalContent, { size: 'lg', backdrop: 'static' })
       this.modalRef.result.then(resolve, resolve)
@@ -79,10 +78,13 @@ export class StudentSubmissionComponent implements OnInit {
 
   save() {
     // save notes + grade
+    if (!confirm("Are you sure you want to change the grade or comments. Your new submission will override the previous one.")) {
+      return;
+    }
     if (this.gradeInput == null) this.gradeValid = false;
     console.log(this.submission._id);
     this.studentsService.gradeAssignment(this.submission._id, this.gradeInput, this.commentsInput);
-    this.studentsService.getSubmissionsByStudentIdFromServer(this.authService.getUserId(), this.coursesServices.currentSection);
+    this.studentsService.studentSubmissionsEventEmitter.emit(true);
     this.close();
   }
 

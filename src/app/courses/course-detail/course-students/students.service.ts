@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Student } from 'src/app/models/student.model';
 import { Submission } from 'src/app/models/submission.model';
 
@@ -52,7 +52,6 @@ export class StudentsService {
 
   async getSubmissionsByStudentIdFromServer(studentId: string, sectionId: string) {
     try {
-
       let res = await fetch("api/submissions/section/" + sectionId + "/student/submissions/all/"
         + studentId, { method: 'GET' });
       if (res.status == 200) {
@@ -75,19 +74,21 @@ export class StudentsService {
             this.studentSubmissions.push(newSubmission);
           }
         });
-        console.log(this.studentSubmissions);
       } else {
         console.log(await res.text());
+        console.log(sectionId);
+        console.log(studentId);
       }
     } catch (err) {
       console.log(err);
     }
   }
 
+  @Output() studentSubmissionsEventEmitter = new EventEmitter<boolean>();
   async getSubmissionsByStudentId(studentId: string, sectionId: string) {
     this.studentSubmissions = [];
     await this.getSubmissionsByStudentIdFromServer(studentId, sectionId);
-    console.log(this.studentSubmissions);
+
     return [...this.studentSubmissions]
   }
 
@@ -136,7 +137,10 @@ export class StudentsService {
           files: submission.files
         }
         this.assignmentSubmission = newSubmission;
+
+        return newSubmission;
       } else {
+        this.assignmentSubmission = null;
         console.log(res.text());
       }
 

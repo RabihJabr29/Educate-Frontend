@@ -83,7 +83,18 @@ export class AssignmentCreateNewComponent implements OnInit {
   async close(): Promise<void> {
 
     this.assignmentsService.assignementEdit = null;
-
+    this.typeInput = null;
+    this.titleInput = null;
+    this.descriptionInput = null;
+    this.startDateInput = null;
+    this.startTimeInput = null;
+    this.endDateInput = null;
+    this.endTimeInput = null;
+    this.maxGradeInput = null;
+    this.percentageInput = null;
+    this.allowLateSubmissions = false;
+    this.allowMultipleSubmissions = false;
+    this.filesToUpload = null;
     if (this.modalConfig.shouldClose === undefined || (await this.modalConfig.shouldClose())) {
       const result = this.modalConfig.onClose === undefined || (await this.modalConfig.onClose())
       this.modalRef.close(result)
@@ -174,7 +185,6 @@ export class AssignmentCreateNewComponent implements OnInit {
       this.endTimeValid = false;
       return;
     } else this.endTimeValid = true;
-    console.log("object");
     let startDate = this.startDateInput.split("-");
     let endDate = this.endDateInput.split("-");
     let startdateFormatted = startDate[2] + '/' + startDate[1] + '/' + startDate[0];
@@ -182,7 +192,7 @@ export class AssignmentCreateNewComponent implements OnInit {
 
     let startTime = this.startTimeInput.split(":");
     if (parseInt(startTime[0]) >= 12) {
-      this.startTimeInput += " PM";
+      this.startTimeInput = (parseInt(startTime[0]) % 12) + ":" + startTime[1] + " PM";
     } else if (parseInt(startTime[0]) < 12) {
       if (parseInt(startTime[0]) == 0) {
         this.startTimeInput = "12:" + startTime[1];
@@ -192,7 +202,7 @@ export class AssignmentCreateNewComponent implements OnInit {
 
     let endTime = this.endTimeInput.split(":");
     if (parseInt(endTime[0]) >= 12) {
-      this.endTimeInput += " PM";
+      this.endTimeInput = (parseInt(endTime[0]) % 12) + ":" + endTime[1] + " PM";
     } else if (parseInt(endTime[0]) < 12) {
       if (parseInt(endTime[0]) == 0) {
         this.endTimeInput = "12:" + endTime[1];
@@ -219,7 +229,6 @@ export class AssignmentCreateNewComponent implements OnInit {
       files: []
     }
     if (this.createEditButtonLabel == "Save") {
-      console.log("Save");
       assignment = {
         assignment_id: this.currentAssignmentId,
         name: this.titleInput,
@@ -251,18 +260,7 @@ export class AssignmentCreateNewComponent implements OnInit {
 
       this.assignmentsService.assignementEdit = null;
       this.close();
-      this.typeInput = null;
-      this.titleInput = null;
-      this.descriptionInput = null;
-      this.startDateInput = null;
-      this.startTimeInput = null;
-      this.endDateInput = null;
-      this.endTimeInput = null;
-      this.maxGradeInput = null;
-      this.percentageInput = null;
-      this.allowLateSubmissions = false;
-      this.allowMultipleSubmissions = false;
-      this.filesToUpload = null;
+
       return;
     }
     let formData = new FormData();
@@ -282,19 +280,7 @@ export class AssignmentCreateNewComponent implements OnInit {
     } catch (err) {
       console.log(err);
     }
-    this.typeInput = null;
-    this.titleInput = null;
-    this.descriptionInput = null;
-    this.startDateInput = null;
-    this.startTimeInput = null;
-    this.endDateInput = null;
-    this.endTimeInput = null;
-    this.maxGradeInput = null;
-    this.percentageInput = null;
-    this.allowLateSubmissions = false;
-    this.allowMultipleSubmissions = false;
-    this.filesToUpload = null;
-    this.assignmentsService.assignementEdit = null;
+
 
   }
 

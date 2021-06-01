@@ -133,7 +133,6 @@ export class AssignmentsService {
   }
 
   async editAssignment(assignmnet: FormData) {
-    // create assingmnet
     try {
       let res = await fetch("api/assignments/", {
         method: 'PUT', body: assignmnet,

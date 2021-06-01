@@ -201,7 +201,7 @@ export class CoursesService {
   courseContentEditMode: boolean = false;
   @Output() editModeEventEmitter = new EventEmitter<boolean>();
 
-  @Output() contentDeletedEventEmitter = new EventEmitter<boolean>();
+  @Output() contentChangedEventEmitter = new EventEmitter<boolean>();
 
   async deleteContent(sectionId: string, path: string) {
     if (this.authService.getUserType() == 'student')
@@ -220,7 +220,7 @@ export class CoursesService {
 
       if (req.status === 201) {
         // return new hierarchy
-        this.contentDeletedEventEmitter.emit(true);
+        this.contentChangedEventEmitter.emit(true);
       } else {
         console.log(req.status + " " + await req.text());
       }
@@ -250,7 +250,7 @@ export class CoursesService {
       });
 
       if (req.status === 201) {
-        this.contentDeletedEventEmitter.emit(true);
+        this.contentChangedEventEmitter.emit(true);
       } else {
         console.log(await req.text())
       }
@@ -282,7 +282,7 @@ export class CoursesService {
           body: formData
         });
       if (req.status === 201) {
-        this.contentDeletedEventEmitter.emit(true);
+        this.contentChangedEventEmitter.emit(true);
         console.log(await req.json());
       } else {
         console.log(req.status + " " + await req.text());

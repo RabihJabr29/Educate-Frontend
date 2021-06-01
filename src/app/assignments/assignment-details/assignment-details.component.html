@@ -8,6 +8,15 @@
           <b>Due Date:</b> {{ assignment.endDate }} {{ assignment.endTime }}
         </p>
         <p class="card-course-text-small"><b>Type:</b> {{ assignment.type }}</p>
+        <p class="card-course-text-small"><b>Status:</b> {{ submitted }}</p>
+        <p class="card-course-text-small">
+          <b>Allow Multiple Submission:</b>
+          {{ assignment.allowMultipleSubmissions }}
+        </p>
+        <p class="card-course-text-small">
+          <b>Allow Late Submission:</b> {{ assignment.allowLateSubmissions }}
+        </p>
+
         <p class="card-course-text-small">
           <b>Max Grade:</b> {{ assignment.maxGrade }}
         </p>
@@ -19,7 +28,7 @@
         </p>
       </div>
       <div class="col">
-        <p class="card-course-text-small text-bold">Files attached:</p>
+        <p class="card-course-text-small text-bold">Assignment documents:</p>
         <ul class="list-file-style">
           <li *ngFor="let item of assignment.files">
             <span class="file-item" (click)="onClickAttachedFile(item)">{{
@@ -31,6 +40,23 @@
     </div>
 
     <form>
+      <div class="form-text align-items-center justify-content-center mt-4" *ngIf="assignmentSubmission">
+        <label
+          class="form-text card-course-text-small text-bold"
+          for="description"
+          >Instructor Comments:
+        </label>
+        <p
+          class="card-course-text-small"
+          id="description"
+          rows="3"
+          readonly
+          style="width: 80%"
+        >
+          {{ assignmentSubmission.comments }}
+        </p>
+      </div>
+
       <div class="form-text align-items-center justify-content-center mt-4">
         <label
           class="form-text card-course-text-small text-bold"
@@ -62,6 +88,10 @@
           style="width: 80%"
           ngModel
           [(ngModel)]="textSubmissionInput"
+          [disabled]="
+            (assignmentSubmission && !assignment.allowMultipleSubmissions) ||
+            !assignment.isActive
+          "
         ></textarea>
       </div>
       <div class="form-group row mt-4">
@@ -76,7 +106,23 @@
             name="formFileMultiple"
             multiple
             (change)="handleFileInput($event.target.files)"
+            [disabled]="
+              (assignmentSubmission && !assignment.allowMultipleSubmissions) ||
+              !assignment.isActive
+            "
           />
+        </div>
+      </div>
+      <div class="form-group row mt-4" *ngIf="this.filesToUpload.length">
+        <div class="col">
+          <p class="card-course-text-small text-bold">Files attached:</p>
+          <ul class="list-file-style">
+            <li *ngFor="let item of filesToUpload">
+              <span class="file-item" (click)="onClickAttachedFile(item)">{{
+                item.name
+              }}</span>
+            </li>
+          </ul>
         </div>
       </div>
     </form>
@@ -110,7 +156,10 @@
         modalConfig.disableSaveButton !== undefined &&
         modalConfig.disableSaveButton()
       "
-      [disabled]="submitDisabled"
+      [disabled]="
+        (assignmentSubmission && !assignment.allowMultipleSubmissions) ||
+        !assignment.isActive
+      "
     >
       Submit
     </button>

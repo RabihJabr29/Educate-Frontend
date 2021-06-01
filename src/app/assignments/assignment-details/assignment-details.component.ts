@@ -26,11 +26,11 @@ export class AssignmentDetailsComponent implements OnInit {
 
   @Input() assignment: Assignment;
   assignmentSubmission: Submission;
-
+  submitted: string;
   constructor(private modalService: NgbModal, private studentsService: StudentsService, private authService: AuthService, private assignmentsService: AssignmentsService) { }
 
   async ngOnInit() {
-    
+
   }
 
   submissionGrade: string | number;
@@ -41,15 +41,18 @@ export class AssignmentDetailsComponent implements OnInit {
     await this.studentsService.getStudentSubmissionByAssignmentID(this.authService.getUserId(), this.assignment.assignment_id);
     this.assignmentSubmission = this.studentsService.assignmentSubmission;
     if (this.assignmentSubmission == undefined) {
+      this.submitted = "Not submitted";
       this.submissionGrade = "Pending";
     } else {
+      this.submitted = "Submitted";
       this.submissionGrade = this.assignmentSubmission.grade;
-      console.log(this.submissionGrade);
-      // if (this.assignmentSubmission && !this.assignment.allowMultipleSubmissions) {
-      //   this.submitDisabled = true;
-      // } else this.submitDisabled = false;
+      this.textSubmissionInput = this.assignmentSubmission.textSubmission;
+      this.filesToUpload = this.assignmentSubmission.files;
+      if ((this.assignmentSubmission && !this.assignment.allowMultipleSubmissions) || !this.assignment.isActive) {
+        this.submitDisabled = true;
+      } else this.submitDisabled = false;
     }
-
+    console.log(this.assignment);
     return new Promise<boolean>(resolve => {
       this.modalRef = this.modalService.open(this.modalContent, { size: 'lg', backdrop: 'static' })
       this.modalRef.result.then(resolve, resolve)
@@ -71,6 +74,9 @@ export class AssignmentDetailsComponent implements OnInit {
   }
 
   submit() {
+    if (!confirm("Are you sure you want to submit again. Your new submission will override the previous one.")) {
+      return;
+    }
     let data = {
       student_id: this.authService.getUserId(),
       assignment_id: this.assignment.assignment_id,

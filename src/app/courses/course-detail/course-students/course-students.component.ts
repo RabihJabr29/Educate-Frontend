@@ -41,12 +41,17 @@ export class CourseStudentsComponent implements OnInit {
   }
 
   async openModal() {
-    return await this.modalComponent.open();
+    this.opened = true;
+    await this.modalComponent.open();
+    this.opened = false;
+    return;
   }
 
+  opened: boolean = false;
   onClickStudent() {
     while (this.studentsService.currentStudent == undefined);
-    this.openModal();
+    if (!this.opened)
+      this.openModal();
   }
 
   onClickAddNewStudent() {
