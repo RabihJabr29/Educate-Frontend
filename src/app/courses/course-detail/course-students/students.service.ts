@@ -165,6 +165,7 @@ export class StudentsService {
       });
       if (res.status == 201) {
         console.log(await res.json());
+        confirm("You have successfully submitted this assignment!")
       } else {
         console.log(res.text());
       }
