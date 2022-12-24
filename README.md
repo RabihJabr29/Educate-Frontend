@@ -4,17 +4,53 @@ Educate is a web-based online learning platform that takes inspiration from the 
 
 # Snapshots
 
-![Authentication](https://github.com/RabihJabr29/Educate-Frontend/Snapshots/Authentication.png?raw=true)
+
+## Authentication
+![Authentication](Snapshots/Authentication.png?raw=true)
 
 
+## Dashboard - Student
+![Student-Dashboard](Snapshots/User-Dashboard.png?raw=true)
 
 
+## Courses - Student
+![Student's-Courses](Snapshots/Courses.png?raw=true)
 
 
+## Course Content - Student
+![Cource-Content](Snapshots/Course-Content.png?raw=true)
 
 
+## Assignments - Student
+![Assignments](Snapshots/Assignments.png?raw=true)
 
 
+## New Assignment - Instructor
+![New-Assignment](Snapshots/Create-New-Assignment.png?raw=true)
+
+
+## Submit Assignment - Student
+![Submit-Assignment](Snapshots/Submit-Assignment.png?raw=true)
+
+
+## Announcments - Student
+![Announcments](Snapshots/Announcements.png?raw=true)
+
+
+## Students Page - Instructor
+![Students Page](Snapshots/Students.png?raw=true)
+
+
+## Individual Student Popup - Instructor
+![Individual-Student](Snapshots/Individual-Student-Popup.png?raw=true)
+
+
+## Assignment Correction - Instructor
+![Assignment-Correction](Snapshots/Instructor-Assignment-Correction-Popup.png?raw=true)
+
+
+## Calendar - Student
+![Calendar](Snapshots/Calendar.png?raw=true)
 
 ## Development server
 
