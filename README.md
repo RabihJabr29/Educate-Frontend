@@ -1,6 +1,20 @@
-# OnlineLearningSystem
+# Educate
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
+Educate is a web-based online learning platform that takes inspiration from the popular learning tool ”BlackBoard Learn” and is motivated by the need of local educational institutions.
+
+# Snapshots
+
+![Authentication](https://github.com/RabihJabr29/Educate-Frontend/Snapshots/Authentication.png?raw=true)
+
+
+
+
+
+
+
+
+
+
 
 ## Development server
 
